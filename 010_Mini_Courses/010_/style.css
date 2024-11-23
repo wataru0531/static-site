@@ -1,0 +1,1057 @@
+/**************************************************************
+
+Reset CSS
+***************************************************************/
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeSpeed;
+  -webkit-tap-highlight-color: transparent;
+  color: #333333;
+  font-family: "Inter", "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  overflow-wrap: break-word;
+  position: relative;
+  z-index: -9999;
+}
+
+
+/**************************************************************
+
+Mini Course Part 1: AWWWARDS Remade - Form Studio - Video Scale on Scroll With HTML, CSS and JS
+① https://www.youtube.com/watch?v=iktOrkLjjMk
+② https://www.youtube.com/watch?v=-KtAEsQTQZc&t=94s
+③ https://www.youtube.com/watch?v=WgKQxXMrJb0&t=28s
+
+***************************************************************/
+
+:root{
+  --max-width: 1440px;
+}
+
+html, body{
+  width: 100%;
+  height: 100%;
+  color: white;
+  background: #000;
+  overscroll-behavior: none;
+}
+
+
+/* ラインセクション */
+.line-container{
+  width: 100%;
+  max-width: var(--max-width);
+  height: 100%;
+  border: 1px solid red;
+  display: flex;
+  justify-content: space-evenly; /*  すべての余白を均等につける */
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.separator{
+  width: 1px;
+  height: 100%;
+  background: rgba(255, 255, 255, .149);
+}
+
+
+/* main */
+main{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: scroll; /* スクロールできるようにする */
+}
+
+/* スクロールコンテナ */
+.scroll__container{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* セクション */
+/* left、transformでずらす */
+section{
+  position: relative;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* テキストアニメーションのためのクラス */
+.text__reveal{
+  font-size: clamp(2rem, 20cqi, 20rem);
+  line-height: 1;
+  overflow: hidden;
+}
+
+.text__reveal span{
+  display: inline-block;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 1s cubic-bezier(0.42, 0, 0.24, 0.99), opacity .5s;
+}
+
+
+/* heroセクション */
+.hero{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.hero__container{
+  width: 100%;
+  max-width: var(--max-width);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+}
+
+.hero__title{
+  overflow: hidden;
+}
+
+.hero__title h1{
+  overflow: hidden;
+}
+
+.hero__title__header{
+  margin-bottom: 2rem;
+  /* clamp(最小値, 推奨値, 最大値) */
+  /* 推奨値 要素の大きさが最小値より大きく、最大値より小さいときに適用される */
+  font-size: clamp(2rem, 20cqi, 20rem);
+  letter-spacing: -.05em;
+}
+
+
+
+/**************************************************************
+Aboutセクション
+***************************************************************/
+.about{
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+.about__container{
+  width: 100%;
+  height: 100%;
+  max-width: var(--max-width);
+  
+  /* min-height: 100vh; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about__text{
+  width: 45%;
+  font-size: 1.4rem;
+  text-align: center;
+  text-transform: uppercase;
+
+  /* text-wrap テキストが複数行の時、行ごとの文字数を同じにしてバランスを自動調整する */
+  /* safari iOSなどでサポートされていない */
+  text-wrap: balance;
+}
+
+/**************************************************************
+videoセクション
+***************************************************************/
+
+/* stickyコンテナ */
+.video{
+  height: 200%;
+  display: flex;
+  justify-content: center;
+  border: 1px solid rgb(107, 236, 107);
+}
+
+/* videoセクションの高さを100vhの高さでstickyアイテムが走る */
+.sticky{
+  width: 100%;
+  height: 50%; /* 親が100%なので、 */
+  /* height: 100vh; */
+  position: sticky;
+  top: 0;
+  background: blue;
+}
+
+.shim{
+  width: 100%;
+  height: 100%;
+  /* background: rgb(209, 110, 110); */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.video video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(.5);
+  will-change: transform;
+
+  position: absolute;
+}
+
+.video__text__overlay{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+
+  /* 最小値、優先値、最大値 */
+  /* cqi ... コンテナクエリの単位。基準コンテナのインラインのサイズの1% */
+  font-size: clamp(2rem, 10cqi, 10rem);
+}
+
+
+/**************************************************************
+projectsセクション
+***************************************************************/
+
+.projects{
+  /* width: 100%; */
+  height: 200%;
+  background: lightpink;
+
+  position: relative;
+}
+
+/* 親要素が200%なので、50%の高さとなる */
+/* 残りの高さをstickyすることになる */
+.projects__sticky{
+  width: 100%;
+  height: 50%;
+  position: sticky;
+  top: 0;
+}
+
+.slider__container{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.projects__slider{
+  height: 100%;
+  width: min-content;
+  overflow: hidden;
+  display: flex;
+  will-change: transform;
+}
+
+/* スライダー１枚 */
+.project{
+  width: 25vw;
+  height: 100%;
+  padding: 80px 20px 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* @media screen and (max-width: 600px){
+  .project{
+    width: 50vw;
+  }
+} */
+
+.image__container{
+  width: 100%;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  /* filter: grayscale(50%); */
+}
+
+.project__image{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center; /* デフォルトで、50%, 50% */
+  filter: grayscale(50%); /* blur、contrast、hue-rotate、drop-shadow */
+}
+
+/* JSで動的に */
+.start{
+  justify-content: flex-start;
+}
+
+.mid{
+  justify-content: center;
+}
+
+.end{
+  justify-content: flex-end;
+}
+
+.project__details{
+  padding-top: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.project__details p{
+  font-size: .8rem;
+}
+
+
+/**************************************************************
+Blogセクション
+***************************************************************/
+
+.blog{
+  width: 100%;
+  height: 400%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* heroとpostを合わせて親要素の400%の高さとなるので25%とする */
+.blog__hero,
+.blog__post{
+  width: 100%;
+  max-width: var(--max-width);
+  height: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+}
+
+
+
+.post{
+  padding: 1rem;
+  width: 50%;
+  background-color: rgba(255, 255, 255, .057);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: relative;
+  will-change: transform;
+}
+
+.post__image__container{
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  position: relative;
+}
+
+.blog__post__img{ /* 画像 */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+}
+
+.post__details{
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.post__details p{
+  font-size: .8rem;
+}
+
+
+/**************************************************************
+circleセクション
+***************************************************************/
+
+.circle__section{
+  height: 200%;
+  position: relative;
+
+  border: 1px solid rgb(43, 158, 129);
+  background-color: lightgreen;
+}
+
+.circle__sticky{
+  position: sticky;
+  top: 0;
+  width: 100%;
+  /* 親要素の高さが200%なので100vhの高さを持つ */
+  /* 親要素の高さをスクロールし終えたら、stickyを抜ける */
+  height: 50%; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle__sticky h2{
+  font-size: clamp(2rem, 20cqi, 20rem);
+  color: #000;
+  z-index: 2;
+}
+
+.circle__container{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+
+  background-color: lightgrey;
+}
+
+.circle{
+  /* vmax */
+  /* 
+    高さと幅の大きい方のサイズを取り、それを100として、
+    その1%を表す
+    横幅500px、高さ904pxの場合、高さ904pxをとり
+    その1%の9.04を取る
+    width: 150vmax; の指定の場合は、9.04*150の幅となる
+  */
+  width: 150vmax;
+  height: 150vmax;
+  border-radius: 505%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+
+  background-color: #fff;
+}
+
+
+/**************************************************************
+Discoverセクション
+***************************************************************/
+
+.discover{
+  height: 100%;
+  background-color: #fff;
+}
+
+.discover__container{
+  /* 親要素の高さをsticky */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.discover__container p{
+  color: black;
+  font-size: 1.4rem;
+  will-change: transform;
+}
+
+/**************************************************************
+end_videoセクション
+***************************************************************/
+
+.end__video{
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.end__video__container{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.end__video__container .end__video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+}
+
+/**************************************************************
+footerセクション
+***************************************************************/
+
+.footer{
+  height: 50%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.footer__container{
+  width: 100%;
+  max-width: var(--max-width);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer__title h2{
+  display: inline-block;
+  color: #111111;
+  overflow: hidden;
+  /* transform: translateY(100%); */
+  transition: .5s;
+}
+
+
+
+
+
+/* only 指定されたメディアタイプのみが適用される唯一の条件になる */
+/* 他のメディアタイプ 印刷(print)、音声合成機能用スタイル(speech)、screenはスクリーン */
+/* メディアクエリ 特定の条件が満たされた場合にスタイルを適用するための条件付きスタイルシート */
+/* メディアタイプ スタイルシートが適用されるメディアの種類 */
+@media only screen and (max-width: 1100px){
+  p {
+    font-size: .8rem;
+  }
+
+  .projects {
+    height: 400%; /* 高さを4倍  */
+  }
+
+  .projects__sticky {
+    height: 25%;
+  }
+
+  .project {
+    width: 50vw;
+  }
+}
+
+@media only screen and (max-width: 600px){
+  .projects {
+    height: 800%; /* 高さを8倍。画像を全て流すために高さを大きくする  */
+  }
+
+  .projects__sticky {
+    height: 12.5%;
+  }
+
+  .project {
+    width: 100vw;
+  }
+
+  .post{
+    width: 80%;
+  }
+}
+
+/**************************************************************
+
+
+
+元のコード
+
+
+
+***************************************************************/
+/* 
+:root{
+  --max-width: 1440px;
+}
+
+html, body{
+  width: 100%;
+  height: 100%;
+  color: white;
+  background: #000;
+  overscroll-behavior: none;
+
+}
+
+
+.line-container{
+  width: 100%;
+  max-width: var(--max-width);
+  height: 100%;
+  border: 1px solid red;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.separator{
+  width: 1px;
+  height: 100%;
+  background: rgba(255, 255, 255, .149);
+  position: absolute;
+}
+
+.separator:nth-child(1){
+  left: 25%;
+}
+.separator:nth-child(2){
+  left: 50%;
+}
+.separator:nth-child(3){
+  left: 75%;
+}
+
+main{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: scroll; 
+}
+
+.scroll__container{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+section{
+  position: relative;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.text__reveal{
+  font-size: clamp(2rem, 20cqi, 20rem);
+  line-height: 1;
+  overflow: hidden;
+}
+.text__reveal span{
+  display: inline-block;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform .5s, opacity .5s;
+}
+
+
+.hero{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.hero__container{
+  width: 100%;
+  max-width: var(--max-width);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+}
+
+.hero__title{
+  overflow: hidden;
+}
+
+.hero__title h1{
+  overflow: hidden;
+}
+
+.hero__title__header{
+  margin-bottom: 2rem;
+  font-size: clamp(2rem, 20cqi, 20rem);
+  letter-spacing: -.05em;
+}
+
+.about{
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+.about__container{
+  width: 100%;
+  height: 100%;
+  max-width: var(--max-width);
+    display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about__text{
+  margin: auto;
+  width: 45%;
+  font-size: 1.4rem;
+  text-align: center;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+
+.video{
+  height: 200%;
+  display: flex;
+  justify-content: center;
+  border: 1px solid rgb(107, 236, 107);
+}
+
+.sticky{
+  width: 100%;
+  height: 50%; 
+  position: sticky;
+  top: 0;
+  background: blue;
+}
+
+.shim{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.video video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(.5);
+  will-change: transform;
+
+  position: absolute;
+}
+
+.video__text__overlay{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  font-size: clamp(2rem, 10cqi, 10rem);
+}
+
+
+.projects{
+  height: 200%;
+  background: lightpink;
+
+  position: relative;
+}
+
+.projects__sticky{
+  width: 100%;
+  height: 50%;
+  position: sticky;
+  top: 0;
+}
+
+.slider__container{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.projects__slider{
+  height: 100%;
+  width: min-content;
+  overflow: hidden;
+  display: flex;
+  will-change: transform;
+}
+
+.project{
+  width: 25vw;
+  height: 100%;
+  padding: 80px 20px 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.image__container{
+  width: 100%;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.project__image{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center; 
+  filter: grayscale(50%);
+}
+
+.start{
+  justify-content: flex-start;
+}
+
+.mid{
+  justify-content: center;
+}
+
+.end{
+  justify-content: flex-end;
+}
+
+.project__details{
+  padding-top: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.project__details p{
+  font-size: .8rem;
+}
+
+
+.blog{
+  width: 100%;
+  height: 400%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.blog__hero,
+.blog__post{
+  width: 100%;
+  max-width: var(--max-width);
+  height: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+}
+
+
+
+.post{
+  padding: 1rem;
+  width: 50%;
+  background-color: rgba(255, 255, 255, .057);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: relative;
+  will-change: transform;
+}
+
+.post__image__container{
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  position: relative;
+}
+
+.blog__post__img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+}
+
+.post__details{
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.post__details p{
+  font-size: .8rem;
+}
+
+.circle__section{
+  height: 200%;
+  position: relative;
+
+  border: 1px solid rgb(43, 158, 129);
+  background-color: lightgreen;
+}
+
+.circle__sticky{
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 50%; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle__sticky h2{
+  font-size: clamp(2rem, 20cqi, 20rem);
+  color: #000;
+  z-index: 2;
+}
+
+.circle__container{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+
+  background-color: lightgrey;
+}
+
+.circle{
+  width: 150vmax;
+  height: 150vmax;
+  border-radius: 505%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+
+  background-color: #fff;
+}
+
+
+.discover{
+  height: 100%;
+  background-color: #fff;
+}
+
+.discover__container{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.discover__container p{
+  color: black;
+  font-size: 1.4rem;
+  will-change: transform;
+}
+
+.end__video{
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.end__video__container{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.end__video__container .end__video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+}
+
+
+.footer{
+  height: 50%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.footer__container{
+  width: 100%;
+  max-width: var(--max-width);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer__title h2{
+  display: inline-block;
+  color: #111111;
+  overflow: hidden;
+  transition: .5s;
+}
+
+@media only screen and (max-width: 1100px){
+  p {
+    font-size: .8rem;
+  }
+
+  .projects {
+    height: 400%;
+  }
+
+  .projects__sticky {
+    height: 25%;
+  }
+
+  .project {
+    width: 50vw;
+  }
+}
+
+@media only screen and (max-width: 600px){
+  .projects {
+    height: 800%;
+  }
+
+  .projects__sticky {
+    height: 12.5%;
+  }
+
+  .project {
+    width: 100vw;
+  }
+
+  .post{
+    width: 80%;
+  }
+} */

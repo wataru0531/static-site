@@ -19,8 +19,9 @@
   },
   "scripts": {
     "clean": "npx rimraf dist .parcel-cache",
-    "sec1": "npm run clean && parcel watch ./01_Layout_Transitions/**/index.html --dist-dir ./dist",
-    "sec2": "npm run clean && parcel watch ./02_webgl/**/index.html --dist-dir ./dist"
+    "sec1": "npm run clean && parcel watch ./010_Mini_Courses/**/index.html --dist-dir ./dist",
+    "sec2": "npm run clean && parcel watch ./02_scrolls/**/index.html --dist-dir ./dist",
+    "sec3": "npm run clean && parcel watch ./030_Layout_Transitions/**/index.html --dist-dir ./dist"
   },
   "staticFiles": {
     "staticPath": "images",

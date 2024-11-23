@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Course: AWWWARDS Remade - Form Studio - Video Scale on Scroll With HTML, CSS and JS</title>
+  <meta 
+    name="description" 
+    content="
+      Mini Course Part 1: AWWWARDS Remade - Form Studio - Video Scale on Scroll With HTML, CSS and JS
+      ① https://www.youtube.com/watch?v=iktOrkLjjMk
+      ② https://www.youtube.com/watch?v=-KtAEsQTQZc&t=94s
+      ③ https://www.youtube.com/watch?v=WgKQxXMrJb0&t=28s
+    "
+  >
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/reset.css">
+  <link rel="stylesheet" href="./style.css">
+
+  <script type="module" defer src="./js/app.js"></script>
+
+</head>
+<body>
+
+  <div class="line-container">
+    <div class="separator"></div>
+    <div class="separator"></div>
+    <div class="separator"></div>
+  </div>
+
+  <main id="js-main">
+    <div class="scroll__container">
+
+      <!-- hero height: 100%; -->
+      <section class="hero" id="hero">
+        <div class="hero__container">
+          <div class="hero__title">
+            <h1 class="hero__title__header text__reveal" id="js-text__reveal">
+              FRONT
+            </h1>
+          </div>
+          <div class="hero__cta">
+            <h4>STUDIO</h4>
+          </div>
+        </div>
+      </section>
+
+      <!-- about height: 100%; -->
+      <section class="about" id="about">
+        <div class="about__container">
+          <div class="about__text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid tempore modi repellendus quis nisi hic amet cumque libero rerum. Culpa ex error qui voluptatem voluptates blanditiis minima at sapiente iusto.
+          </div>
+        </div>
+      </section>
+
+
+      <!-- video height: 200%; -->
+      <section class="video" id="js-video-section">
+        <div class="shim"></div>
+
+        <div class="sticky">
+          <video
+            id="js-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            src="https://framerusercontent.com/modules/assets/BcIElVBzSD9P1ht5PhehnVyzTA~0iRDOKjSaNyoXJfsXAcSsdeEYSbJ8aAp3MvS5ts7LL0.mp4">
+          </video>
+          <div class="video__text__overlay">
+            <h2 class="text__header__left">SHOW</h2>
+            <h2 class="text__header__right">CASE</h2>
+          </div>
+        </div>
+      </section>
+
+      <!-- projects height: 400%; -->
+      <section class="projects" id="js-projects">
+        <div class="projects__sticky" id="js-projects__sticky">
+          <div class="slider__container">
+            <div class="projects__slider" id="js-projects__slider">
+              <!-- 
+                <div class="project start">
+                  <div class="image__container">
+                    <img class="project__image" src="https://source.unsplash.com/bIhpiQA009k">
+                  </div>
+                  <div class="project__details">
+                    <p>PROJECTS ONE</p>
+                    <p>WEB DESIGN</p>
+                  </div>
+                </div> 
+              -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- blog height: 400%; -->
+      <section class="blog" id="js-blog">
+        <div class="blog__hero">
+          <h2 class="text__reveal" id="js-text__reveal">BLOG</h2>
+        </div>
+      <!-- 
+        <div class="blog__post">
+          <div class="post" id="js-post">
+            <div class="post__image__container">
+              <img class="blog__post__img" src="https://source.unsplash.com/2JIvboGLeho">
+            </div>
+            <div class="post__details">
+              <p>BlOG POST ONE</p>
+              <p>3 MIN</p>
+            </div>
+          </div>
+        </div> 
+      -->
+      </section>
+
+      <!-- circle 200% -->
+      <section class="circle__section" id="js-circle__section">
+        <div class="circle__sticky">
+          <h2>NETS</h2>
+          <div class="circle__container">
+            <div class="circle" id="js-circle"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- discover height: 100%; -->
+      <section class="discover">
+        <div class="discover__container" id="js-discover__container">
+          <p class="text__left" id="js-text__left">THIS SITE WAS DESIGNED BY FAVORITE FLAME</p>
+          <p class="text__right" id="js-text__right">EXCLUSIVE FOR THE BRAND IDENTITY.</p>
+        </div>
+      </section>
+
+      <!-- end-video height: 100%; -->
+      <section class="end__video" id="end__video">
+        <div class="shim"></div>
+        <div class="end__video__container">
+          <video 
+            class="end__video"
+            autoplay
+            muted
+            loop
+            playsinline
+            src="https://framerusercontent.com/assets/sagu9WJMRc7UvZaZc4N2cUQ68Z4.mp4"
+          ></video>
+          <!-- playsinline -->
+          <!-- 
+            ビデオがインラインで再生される
+            → 全画面モードにして再生するのではなく、動画ファイルが埋め込まれた表示領域でそのまま動画ファイルを再生すること
+            これにより、ビデオが全画面表示にならず、HTMLの他のコンテンツと共存しながら再生される。
+            この属性は、モバイルデバイスでの動作を制御するために使用されます。
+          -->
+        </div>
+      </section>
+
+      <!-- footer height: 50%; -->
+      <section class="footer" id="footer">
+        <div class="footer__container">
+          <div class="footer__title">
+            <h2 class="text__reveal" id="js-text__reveal">FRONT</h2>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+
+  <!-- 元のコード -->
+  <!-- <div class="line-container">
+    <div class="separator"></div>
+    <div class="separator"></div>
+    <div class="separator"></div>
+  </div>
+
+  <main>
+    <div class="scroll__container">
+
+      <section class="hero" id="hero">
+        <div class="hero__container">
+          <div class="hero__title">
+            <h1 class="hero__title__header text__reveal">
+              FRONT
+            </h1>
+          </div>
+          <div class="hero__cta">
+            <h4>STUDIO</h4>
+          </div>
+        </div>
+      </section>
+
+      <section class="about" id="about">
+        <div class="about__container">
+          <div class="about__text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid tempore modi repellendus quis nisi hic amet cumque libero rerum. Culpa ex error qui voluptatem voluptates blanditiis minima at sapiente iusto.
+          </div>
+        </div>
+      </section>
+
+      <section class="video" id="video">
+        <div class="shim"></div>
+
+        <div class="sticky">
+          <video 
+            autoplay
+            muted
+            loop
+            playsinline
+            src="https://framerusercontent.com/modules/assets/BcIElVBzSD9P1ht5PhehnVyzTA~0iRDOKjSaNyoXJfsXAcSsdeEYSbJ8aAp3MvS5ts7LL0.mp4">
+            
+          </video>
+          <div class="video__text__overlay">
+            <h2 class="text__header__left">SHOW</h2>
+            <h2 class="text__header__right">CASE</h2>
+          </div>
+        </div>
+      </section>
+
+      <section class="projects" id="projects">
+        <div class="projects__sticky">
+          <div class="slider__container">
+            <div class="projects__slider">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="blog" id="blog">
+        <div class="blog__hero">
+          <h2 class="text__reveal">BLOG</h2>
+        </div>
+      </section>
+
+      <section class="circle__section" id="circle__section">
+        <div class="circle__sticky">
+          <h2>TBI</h2>
+          <div class="circle__container">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="discover" id="discover">
+        <div class="discover__container">
+          <p class="text__left">THIS SITE WAS DESIGNED BY FAVORITE FLAME</p>
+          <p class="text__right">EXCLUSIVE FOR THE BRAND IDENTITY.</p>
+        </div>
+      </section>
+
+      <section class="end__video" id="end__video">
+        <div class="shim"></div>
+        <div class="end__video__container">
+          <video 
+            class="end__video"
+            autoplay
+            muted
+            loop
+            playsinline
+            src="https://framerusercontent.com/assets/sagu9WJMRc7UvZaZc4N2cUQ68Z4.mp4"
+          ></video>
+          
+        </div>
+      </section>
+
+      <section class="footer" id="footer">
+        <div class="footer__container">
+          <div class="footer__title">
+            <h2 class="text__reveal">FRONT</h2>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  -->
+</body>
+</html>
