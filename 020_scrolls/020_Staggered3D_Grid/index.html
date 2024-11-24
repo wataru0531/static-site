@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Staggered (3D) Grid Animations | Codrops</title>
+    <meta name="keywords" content="scroll animation, grid, gsap, 3d, filter" />
+    <meta name="author" content="Codrops" />
+    <meta name="description" content="" />
+
+    <!--
+      フォントの読み込み
+      TypekitはAdobeのフォントライブラリで、サイトに個性的でデザイン性の高いフォントを簡単に追加できるサービス 
+    -->
+    <link rel="stylesheet" href="https://use.typekit.net/pxn8wdc.css">
+    <link rel="stylesheet" href="/reset.css">
+    <link rel="stylesheet" href="./style.css" />
+
+    <!-- GSAP -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+
+    <!-- ScrollTrigger -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
+
+    <!-- Lenis -->
+    <script defer src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script> 
+
+    <!-- split-type -->
+    <script defer src="https://unpkg.com/split-type"></script>
+
+    <script>document.documentElement.className="js";</script>
+
+    <script type="module" defer src="./js/app.js"></script>
+  </head>
+  <body class="loading">
+
+    <main class="shadow">
+      <div class="frame">
+        <a class="frame__back" href="https://tympanus.net/codrops/?p=81462">Article</a>
+        <a class="frame__archive" href="https://tympanus.net/codrops/demos">All demos</a>
+        <a class="frame__github" href="https://github.com/codrops/Staggered3DGridAnimations">GitHub</a>
+      </div>
+      <div class="intro"> 
+        <h1 class="intro__title font-alt">Staggered (3D) <br>Grid Animations</h1> 
+        <nav class="tags">
+          <a href="https://tympanus.net/codrops/demos/?tag=scroll">#scroll</a>
+          <a href="https://tympanus.net/codrops/demos/?tag=3d">#3d</a>
+          <a href="https://tympanus.net/codrops/demos/?tag=grid">#grid</a>
+        </nav>
+        <span class="intro__info">Scroll gently &amp; enjoy</span> 
+      </div>
+  
+      <!-- Grid Section -->
+      <section>
+        <div class="grid grid-narrow" id="js-grid">
+          <!-- JS側から挿入 -->
+        </div>
+
+        <!-- marquee -->
+        <div class="mark">
+          <div class="mark__inner font-alt" id="js-marquee-inner">
+            <span>Sora Takahashi</span> <span>空 高橋</span>
+            <span>Aoi Nakamura</span> <span>葵 中村</span>
+            <span>Ren Fujimoto</span> <span>蓮 藤本</span>
+            <span>Mio Sakurai</span> <span>澪 桜井</span>
+            <span>Shin Yamamoto</span> <span>真 山本</span>
+            <span>Kaori Kobayashi</span> <span>香織 小林</span>
+            <span>Hikari Inoue</span> <span>光 井上</span>
+            <span>Yuki Kinoshita</span> <span>雪 木下</span>
+            <span>Rina Ishikawa</span> <span>莉奈 石川</span>
+            <span>Kaito Matsumoto</span> <span>海斗 松本</span>
+          </div>
+        </div>
+        <!-- marquee -->
+      </section>
+  
+      <!-- テキストアニメーション -->
+      <section>
+        <div class="text font-alt" id="js-text">Halcyon</div>
+      </section>
+      
+      <!-- gridの横にフルサイズのアニメーション -->
+      <section>
+        <div class="grid grid--full">
+          <!-- JS側から挿入 -->
+        </div>
+      </section>
+  
+      <p class="credits font-alt">Made by <a href="https://x.com/codrops">@codrops</a></p>
+      <p class="credits font-alt"><a href="https://tympanus.net/codrops/demos">More demos</a></p>
+    </main>
+  </body>
+</html>

@@ -1,5 +1,6 @@
 {
   "name": "static-site",
+  "type": "module",
   "dependencies": {
     "@barba/core": "^2.9.7",
     "@parcel/core": "^2.6.2",
@@ -20,8 +21,10 @@
   "scripts": {
     "clean": "npx rimraf dist .parcel-cache",
     "sec1": "npm run clean && parcel watch ./010_Mini_Courses/**/index.html --dist-dir ./dist",
-    "sec2": "npm run clean && parcel watch ./02_scrolls/**/index.html --dist-dir ./dist",
-    "sec3": "npm run clean && parcel watch ./030_Layout_Transitions/**/index.html --dist-dir ./dist"
+    "sec2": "npm run clean && parcel watch ./020_scrolls/**/index.html --dist-dir ./dist",
+    "sec3": "npm run clean && parcel watch ./030_Layout_Transitions/**/index.html --dist-dir ./dist",
+    "sec4": "npm run clean && parcel watch ./040_Grid/**/index.html --dist-dir ./dist",
+    "sec5": "npm run clean && parcel watch ./030_Layout_Transitions/**/index.html --dist-dir ./dist"
   },
   "staticFiles": {
     "staticPath": "images",
