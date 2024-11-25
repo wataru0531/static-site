@@ -146,7 +146,7 @@ async function fetchJsonData(_url, _variableName){
   }
 }
 
-// 画像を生成し、画像のロードの完了を待つ関数
+// 画像を生成(imgタグ)し、画像のロードの完了を待つ関数
 function loadImage(_src){
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -157,6 +157,7 @@ function loadImage(_src){
 }
 
 // CSSの背景画像を含めた画像の読み込みが終わるまで待機する関数
+// loading時に使う関数なので画像などは返さない
 function preloadImages(selector = 'img') {
   const elements = [...document.querySelectorAll(selector)];
   // console.log(elements); // NodeList(79) [div.grid__item-img, ...]
@@ -172,7 +173,7 @@ function preloadImages(selector = 'img') {
     // console.log(urlMatch); // (3) ['url("http://127.0.0.1:5501/images/1.avif")', '"', 'http://127.0.0.1:5501/images/1.avif', index: 0, input: 'url("http://127.0.0.1:5501/images/1.avif")', groups: undefined]
     if (urlMatch) {
       const url = urlMatch[2];
-      imagePromises.push(utils.loadImage(url));
+      imagePromises.push(utils.loadImage(url)); 
     }
     // console.log(element.tagName); // div
     if (element.tagName === 'IMG') { // img要素の場合の処理

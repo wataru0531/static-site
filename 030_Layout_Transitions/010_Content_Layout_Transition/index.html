@@ -4,37 +4,50 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Stack to Content Layout Transition | Codrops</title>
-		<!-- Generate Meta Tags via https://www.opengraph.xyz -->
+		
 		<meta name="description" content="An experimental layout transition where a stack of images animates to a gallery view, showing some more content." />
 		<meta name="keywords" content="stack, layout transition, menu, gallery, gsap, javascript" />
 		<meta name="author" content="Codrops" />
 
-		<!-- <link rel="shortcut icon" href="favicon.ico"> -->
+		<link rel="stylesheet" href="https://use.typekit.net/mai4fgw.css">
 		<link rel="stylesheet" href="/reset.css">
-		<!-- <link rel="stylesheet" href="https://use.typekit.net/mai4fgw.css"> -->
 		<link rel="stylesheet" type="text/css" href="./css/base.css" />
 
-		<script>document.documentElement.className="js";var supportsCssVars=function(){var e,t=document.createElement("style");return t.innerHTML="root: { --tmp-var: bold; }",document.head.appendChild(t),e=!!(window.CSS&&window.CSS.supports&&window.CSS.supports("font-weight","var(--tmp-var)")),t.parentNode.removeChild(t),e};supportsCssVars()||alert("Please view this demo in a modern browser that supports CSS Variables.");</script>
-		<script src="//tympanus.net/codrops/adpacks/analytics.js"></script>
+		<script>document.documentElement.className="js";</script>
+
+		<script defer type="module" src="js/index.js"></script>
 	</head>
 	<body class="demo-1 loading">
 		<main>
-			<div class="frame">
-				<div class="frame__title">
-					<h1 class="frame__title-main">Stack to Content Layout Transition</h1>
-					<a aria-label="Back to the article" class="frame__title-back" href="https://tympanus.net/codrops/?p=63558">
+			<!-- header -->
+			<header class="header">
+				<div class="header__title">
+					<h1 class="header__title-main">Stack to Content Layout Transition</h1>
+					<a aria-label="Back to the article" class="header__title-back" href="https://tympanus.net/codrops/?p=63558">
 						<span class="oh__inner">Back to the article</span>
 						<svg width="18px" height="18px" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M18.25 15.5a.75.75 0 00.75-.75v-9a.75.75 0 00-.75-.75h-9a.75.75 0 000 1.5h7.19L6.22 16.72a.75.75 0 101.06 1.06L17.5 7.56v7.19c0 .414.336.75.75.75z"/></svg>
 					</a>
 					<br/>
-					<a class="frame__title-prev" href="https://tympanus.net/Development/IntroTrailEffect/">Previous demo</a>
+					<a class="header__title-prev" href="https://tympanus.net/Development/IntroTrailEffect/">Previous demo</a>
 				</div>
-				<div class="frame__logo">
-					<h2 class="frame__logo-title">Jonas Tanaka</h2>
-					<span class="frame__logo-subtitle">フォトグラフィー</span>
+				<div class="header__logo">
+					<h2 class="header__logo-title">Jonas Tanaka</h2>
+					<span class="header__logo-subtitle">フォトグラフィー</span>
 				</div>
-			</div>
+			</header>
+
+			
+			<!-- 
+				.contentの中がいろいろと切り替わることでlayout-transitionができあがる
+				
+				.stack-wrapの中の.stack__itemをクリック
+				→ .content__itemが浮かび上がる
+				→ backボタンのopacityが1に
+				→ .stack-wrapの中のstackが、.slidesの中に格納されてスライダーができる
+			-->
 			<div class="content">
+
+				<!-- アイテム -->
 				<div class="content__item">
 					<h2 class="content__item-title">
 						<span class="oh"><span class="oh__inner">Queen of </span></span><span class="oh"><span class="oh__inner">the Sea</span></span></h2>
@@ -43,6 +56,7 @@
 						<p class="oh"><span class="oh__inner">Hidesato felt very sorry for the Dragon King on hearing his story, and readily promised to do what he could to help him.</span></p>
 					</div>
 				</div>
+
 				<div class="content__item">
 					<h2 class="content__item-title"><span class="oh"><span class="oh__inner">Hinata's</span></span><span class="oh"><span class="oh__inner">Trouble</span></span></h2>
 					<div class="content__item-description">
@@ -121,7 +135,17 @@
 					</button>
 				</nav>
 			</div>
+
+			<!-- 
+				.stack__itemのどれかをクリックすると
+				この中にstack-wrap の　.stack を挿入
+			-->
 			<div class="slides"></div>
+
+			<!-- 
+				通常表示
+				.stack__itemをクリックすると、.slidesに挿入
+			-->
 			<div class="stack-wrap">
 				<div class="stack">
 					<div class="stack__item stack__item--empty"></div>
@@ -138,12 +162,14 @@
 					<div class="stack__item stack__item--empty"></div>
 				</div>
 			</div>
+
+			<!-- .stack_itemをクリック時に上に上げるだけ -->
 			<div class="title">
 				<h2 class="title__main oh"><span class="oh__inner">Photography</span></span></h2>
 				<span class="title__sub oh"><span class="oh__inner">1986 &mdash; 2022</span></span>
 			</div>
+
 		</main>
-		<script type="module" src="js/index.js"></script>
-		<script src="https://tympanus.net/codrops/adpacks/cda_sponsor.js"></script>
+
 	</body>
 </html>

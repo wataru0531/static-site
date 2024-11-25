@@ -7,80 +7,57 @@ gsap.registerPlugin(Flip);
 import { Observer } from 'gsap/Observer';
 gsap.registerPlugin(Observer);
 
+
 const body = document.body;
 
-let winsize = {width: window.innerWidth, height: window.innerHeight};
+let winsize = { width: window.innerWidth, height: window.innerHeight };
+
 window.addEventListener('resize', () => {
-	winsize = {width: window.innerWidth, height: window.innerHeight};
+	winsize = { width: window.innerWidth, height: window.innerHeight };
 });
 
-/**
- * Class representing the Slideshow
- */
+
 export class Slideshow {
-	// DOM elements
-	DOM = {
-		// main element (.stack)
+	// DOMを格納
+	DOM = { // this.DOM
 		el: null,
-		// stack items (.stack__item)
 		items: null,
-
-		// the DOM location of the .stacks element when the slideshow is closed
-		stackWrap: document.querySelector('.stack-wrap'),
-		// the DOM location of the .stacks element when the slideshow is open
-		slides: document.querySelector('.slides'),
-		
-		// .content element
+		stackWrap: document.querySelector('.stack-wrap'), // アイテムの初期位置
+		slides: document.querySelector('.slides'),        // アイテムクリック時にアイテムを格納させるラッパー
 		content: document.querySelector('.content'),
-		// the content items (.content__item)
-		contentItems: [...document.querySelectorAll('.content__item')],
-		
-		// the main title ("Photography")
-		mainTitleTexts: [...document.querySelectorAll('.title > .oh > .oh__inner')],
-
-		// back control (.content__back)
-		backCtrl: document.querySelector('.content__back'),
-		// navigation (.content__nav-wrap)
+		contentItems: [...document.querySelectorAll('.content__item')], // 左下のタイトル
+		mainTitleTexts: [...document.querySelectorAll('.title > .oh > .oh__inner')], // 右下のタイトル
+		backCtrl: document.querySelector('.content__back'), // backボタン
 		nav: document.querySelector('.content__nav-wrap'),
-		// navigation arrows
 		navArrows: {
 			prev: document.querySelector('.content__nav--prev'),
 			next: document.querySelector('.content__nav--next'),
 		}
 	}
-	// Content instances
-	contentItems = [];
-	// Check is Slishow is in open mode or closed mode
-	isOpen = false;
-	// Current item's position
-	current = -1;
-	// Total items
-	totalItems = 0;
-	// items gap (CSS variable)
-	gap = getComputedStyle(document.documentElement).getPropertyValue('--slide-gap');
 
-	/**
-	 * Constructor.
-	 * @param {NodeList} DOM_el - main element (.stack)
-	 */
-	constructor(DOM_el) {
+	contentItems = []; // ContentItemを格納していく
+	isOpen = false;
+	current = -1;
+	totalItems = 0;
+	gap = getComputedStyle(document.documentElement).getPropertyValue('--slide-gap');
+	// document.documentElement → ルート要素のhtml
+
+	constructor(DOM_el) { // .stack → .アイテム達を格納している要素
+		// console.log(DOM_el); 
 		this.DOM.el = DOM_el;
 		
 		this.DOM.items = [...this.DOM.el.querySelectorAll('.stack__item:not(.stack__item--empty)')];
 		this.totalItems = this.DOM.items.length;
 		this.DOM.contentItems.forEach(item => this.contentItems.push(new ContentItem(item)));
-
-		this.initEvents();
-	}
-	/**
-	 * Event binding.
-	 */
-	initEvents() {
+		console.log(this.DOM.contentItems); // (10) [div.content__item, div.content__item, ... ]
 		
+		this.initEvents(); 
+	}
+	
+	// 初期化処理
+	initEvents() {
 		this.DOM.items.forEach((item, position) => {
-			// Clicking on a stack item reveals the slideshow navigation and the item's content
 			item.addEventListener('click', () => {
-				// Show the item's content
 				this.open(item);
 			});
 		});
@@ -96,7 +73,6 @@ export class Slideshow {
 			this.navigate('prev');
 		});
 
-		// Trigger the close() on scroll by using the gsap observer plugin
 		const scrollFn = () => {
 			if ( this.isOpen && !this.isAnimating ) {
 				this.close();
@@ -114,29 +90,19 @@ export class Slideshow {
 		this.scrollObserver.disable();
 
 	}
-	/**
-	 * Opens the slideshow navigation and reveals the item's content.
-	 * @param {NodeList} stackItem - the clicked item
-	 */
+	
 	open(stackItem) {
 
 		if ( this.isAnimating || this.isOpen ) {
 			return;
 		}
 		this.isAnimating = true;
-		
-		// Update the current value
 		this.current = this.DOM.items.indexOf(stackItem);
-
-		// enable the observer (closes teh slideshow on scroll/touch)
 		this.scrollObserver.enable();
-
 		const scrollY = window.scrollY;
-		
 		body.classList.add('oh');
 		this.DOM.content.classList.add('content--open');
 		
-		// set CSS current classes to both content and stack item elements
 		this.contentItems[this.current].DOM.el.classList.add('content__item--current');
 		this.DOM.items[this.current].classList.add('stack__item--current');
 
@@ -145,17 +111,14 @@ export class Slideshow {
 
 		const itemCenter = stackItem.offsetTop + stackItem.offsetHeight/2;
 		
-		// seems to solve a bug in firefox
 		document.documentElement.scrollTop = document.body.scrollTop = 0;
 
 		gsap.set(this.DOM.el, {
 			y: winsize.height/2 - itemCenter + scrollY
 		});		
 		
-		// seems to solve a bug in firefox
 		document.documentElement.scrollTop = document.body.scrollTop = 0;
 
-		// Flip
 		Flip.from(state, {
 			duration: 1,
 			ease: 'expo',
@@ -163,7 +126,7 @@ export class Slideshow {
 				this.isOpen = true;
 				this.isAnimating = false;
 			},
-			// seems to solve a bug in firefox
+
 			onStart: () => document.documentElement.scrollTop = document.body.scrollTop = scrollY,
 			absoluteOnLeave: true,
 		})
@@ -196,9 +159,7 @@ export class Slideshow {
 		}, 0);
 
 	}
-	/**
-	 * Closes the slideshow navigation and hides the content
-	 */
+	
 	close() {
 
 		if ( this.isAnimating || !this.isOpen ) {
@@ -219,7 +180,7 @@ export class Slideshow {
 			y: 0
 		});
 
-		// Flip
+		
 		Flip.from(state, {
 			duration: 1,
 			ease: 'expo',
@@ -256,12 +217,8 @@ export class Slideshow {
 			opacity: 0
 		}, 0);
 	}
-	/**
-	 * Navigation
-	 * @param {String} direction 'prev' || 'next'
-	 */
+	
 	navigate(direction) {
-		
 		if ( this.isAnimating || (direction === 'next' && this.current === this.totalItems-1) || (direction === 'prev' && this.current === 0) ) return;
 		this.isAnimating = true;
 
@@ -273,7 +230,6 @@ export class Slideshow {
 		currentItem.classList.remove('stack__item--current');
 		upcomingItem.classList.add('stack__item--current');
 
-		// show/hide arrows
 		gsap.set(this.DOM.navArrows.prev, {opacity: this.current > 0 ? 1 : 0});
 		gsap.set(this.DOM.navArrows.next, {opacity: this.current < this.totalItems-1 ? 1 : 0});
 		

@@ -1,6 +1,5 @@
 
 
-
 :root {
 	font-size: 15px;
 	margin: 0;
@@ -94,8 +93,8 @@ a:focus:not(:focus-visible) {
 
 a:focus-visible {
 	/* Draw a very noticeable focus style for
-	 keyboard-focus on browsers that do support
-	 :focus-visible */
+	keyboard-focus on browsers that do support
+	:focus-visible */
 	outline: 2px solid red;
 	background: transparent;
 }
@@ -123,7 +122,7 @@ a:focus-visible {
 	outline: none;
 }
 
-.frame {
+.header {
 	padding: 1.5rem 5vw 0;
 	z-index: 100;
 	text-align: center;
@@ -132,41 +131,41 @@ a:focus-visible {
 	width: 100%;
 }
 
-.frame__title {
+.header__title {
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
 }
 
-.frame__title-main {
+.header__title-main {
 	font-size: 1rem;
 	margin: 0;
 	font-weight: normal;
 }
 
-.frame__title-back {
+.header__title-back {
 	position: relative;
 	display: flex;
 	align-items: flex-end;
 }
 
-.frame__title-back span {
+.header__title-back span {
 	display: none;
 }
 
-.frame__title-back svg {
+.header__title-back svg {
 	fill: #fff;
 }
 
-.frame__title-prev {
+.header__title-prev {
 	width: 100%;
 }
 
-.frame__logo {
+.header__logo {
 	line-height: 0.9;
 }
 
-.frame__logo-title {
+.header__logo-title {
 	font-family: wayfinder-cf, serif;
 	font-weight: 100;
 	font-style: normal;
@@ -174,7 +173,7 @@ a:focus-visible {
 	margin: 0;
 }
 
-.frame__logo-subtitle {
+.header__logo-subtitle {
 	margin-left: 0.75rem;
 }
 
@@ -260,17 +259,38 @@ a:focus-visible {
 	font-weight: 200;
 }
 
+/* 
+	.contentの中がいろいろと切り替わることでlayout-transitionができあがる
+	.stack-wrapの中の.stack__itemをクリック
+	→ .content__itemが浮かび上がる
+	→ backボタンのopacityが1に
+	→ .stack-wrapの中のstackが、.slidesの中に格納されてスライダーができる
+*/
 .content {
-	position: fixed;
+	padding: var(--page-padding);
+	width: 100%;
+	height: 100vh;
 	pointer-events: none;
+	position: fixed;
 	top: 0;
 	left: 0;
 	z-index: 100;
+
 	display: grid;
-	height: 100vh;
-	width: 100%;
-	padding: var(--page-padding);
-	grid-template-areas: '...' 'back' 'slides' '...';
+	grid-template-areas: 
+		'...' 
+		'back' 
+		'slides' 
+		'...'
+	;
+	/* 53em以上で↓に変化  */
+	/* 
+		grid-template-areas: 
+			'back slides'
+			'title slides'	
+			'... slides'
+		;
+	*/
 	grid-template-columns: 1fr;
 	grid-template-rows: auto auto 1fr auto;
 	grid-gap: var(--slide-gap);
@@ -331,6 +351,19 @@ a:focus-visible {
 }
 
 .content__nav-wrap {
+	/* 
+		grid-area: 1 / 1 / -1 / -1; 
+		→ ここでは、グリッド全体にアイテムを広げる指定
+
+		grid-area: row-start / column-start / row-end / column-end;
+		→ row-start:    アイテムが配置される行の開始位置（行番号）。
+			column-start: アイテムが配置される列の開始位置（列番号）。
+			row-end:      アイテムが配置される行の終了位置（行番号）。
+			column-end:   アイテムが配置される列の終了位置（列番号）。
+		
+		1は、 グリッドの 最初の行 または 最初の列
+		-1は、グリッドの 最後の行 または 最後の列
+	*/
 	grid-area: 1 / 1 / -1 / -1;
 	display: flex;
 	flex-direction: column;
@@ -375,7 +408,7 @@ a:focus-visible {
 	:root {
 		--stack-margin: 50vh;
 	}
-	.frame {
+	.header {
 		text-align: left;
 		top: 0;
 		left: 0;
@@ -389,19 +422,21 @@ a:focus-visible {
 		pointer-events: none;
 		grid-template-columns: auto auto 1fr;
 		grid-template-rows: auto auto auto;
-		grid-template-areas: 'logo ... sponsor'
-							'... ...  ...'
-							'title title ...';
+		grid-template-areas: 
+			'logo ... sponsor'
+			'... ...  ...'
+			'title title ...'
+		;
 	}
-	.frame__title {
+	.header__title {
 		grid-area: title;
 		justify-content: flex-start;
 		color: var(--color-text-alt);
 	}
-	.frame__logo {
+	.header__logo {
 		grid-area: logo;
 	}
-	.frame a {
+	.header a {
 		pointer-events: auto;
 	}
 	.content {
