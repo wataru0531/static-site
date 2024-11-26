@@ -265,6 +265,7 @@ a:focus-visible {
 	→ .content__itemが浮かび上がる
 	→ backボタンのopacityが1に
 	→ .stack-wrapの中のstackが、.slidesの中に格納されてスライダーができる
+		スライド部分に関しては、.slidesが.contentの右サイドにくるだけ
 */
 .content {
 	padding: var(--page-padding);
@@ -284,11 +285,15 @@ a:focus-visible {
 		'...'
 	;
 	/* 53em以上で↓に変化  */
+	/*
+		...は、指定なし。.でも、..でもドットはいくつでもいいし、
+		##の記号でもなんでもいい
+	*/
 	/* 
 		grid-template-areas: 
-			'back slides'
+			'back  slides'
 			'title slides'	
-			'... slides'
+			'..... slides'
 		;
 	*/
 	grid-template-columns: 1fr;
@@ -479,6 +484,8 @@ a:focus-visible {
 		margin-left: auto;
 		margin-right: var(--slide-gap);
 	}
+
+	/*  */
 	.slides .stack__item--current {
 		opacity: 1;
 	}

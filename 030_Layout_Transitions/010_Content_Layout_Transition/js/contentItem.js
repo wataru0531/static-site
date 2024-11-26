@@ -1,5 +1,5 @@
 
-
+// 左下に位置しているタイトルに関数クラス
 
 export class ContentItem {
 	DOM = {
