@@ -14,10 +14,10 @@
 	/* Stack and slideshow */
 	--stack-margin: 10rem;
 	--slide-gap: 2vh;
-	--stack-width: 38vw;
-	--stack-item-height: 8vh;
-	--slide-width: 40vw;
-	--slide-height: 50vh;
+
+	--stack-width: 38vw; /* stackのアイテムを格納するラッパーの幅 */
+	--stack-item-height: 8vh; /* 中央にある時の高さ */
+	--slide-height: 50vh; /* 右サイドに移動した時の高さ */
 }
 
 body {
@@ -177,12 +177,14 @@ a:focus-visible {
 	margin-left: 0.75rem;
 }
 
+/* stack-wrap */
 .stack-wrap {
 	width: 100%;
 	position: absolute;
     top: 0;
 }
 
+/* stack */
 .stack {
 	margin: 0 auto;
 	width: var(--stack-width);
@@ -192,6 +194,7 @@ a:focus-visible {
 	place-items: center;
 }
 
+/*  */
 .stack__item {
 	opacity: 0.2;
 	width: 100%;
@@ -212,6 +215,7 @@ a:focus-visible {
 	height: var(--stack-margin);
 }
 
+/* slides */
 .slides {
 	width: 100%;
 	position: relative;

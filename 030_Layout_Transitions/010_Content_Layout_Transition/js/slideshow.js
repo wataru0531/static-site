@@ -66,24 +66,29 @@ export class Slideshow {
 	
 	// 初期化処理
 	initEvents() {
+		// 画像クリック
 		this.DOM.stackItems.forEach((stackItem, position) => { // .stack__item
-			stackItem.addEventListener('click', () => {
+			stackItem.addEventListener('pointerdown', () => {
 				this.open(stackItem); 
 			});
 		});
 
-		this.DOM.backCtrl.addEventListener('click', () => {
+		// backボタン
+		this.DOM.backCtrl.addEventListener('pointerdown', () => {
 			this.close();
 		});
 
-		this.DOM.navArrows.next.addEventListener('click', () => {
+		// 上下矢印
+		this.DOM.navArrows.next.addEventListener('pointerdown', () => {
 			this.navigate('next');
 		});
-		this.DOM.navArrows.prev.addEventListener('click', () => {
+		this.DOM.navArrows.prev.addEventListener('pointerdown', () => {
 			this.navigate('prev');
 		});
 
+		// 上下にスクロールした際に発火 → デフォルトの状態に戻す
 		const scrollFn = () => {
+			// 右サイドに.stackがある状態、アニメーションが終わっている状態
 			if ( this.isOpen && !this.isAnimating ) {
 				this.close();
 				this.scrollObserver.disable();
@@ -101,7 +106,7 @@ export class Slideshow {
 			                      // → ここではscroll, wheel, pointerができなくなる
 		});
 
-		this.scrollObserver.disable(); // この時点では向こうにしておく
+		this.scrollObserver.disable(); // この時点では監視を無効にしておく
 	}
 	
 	// 左サイドのスライドを生成、
@@ -115,14 +120,20 @@ export class Slideshow {
 		// → Observerが入力イベントを監視し、登録されたコールバック(onDown, onUp)が実行可能となる
 
 		const scrollY = window.scrollY;
-		$.body.classList.add('oh');
+		// $.body.classList.add('oh');
 		this.DOM.content.classList.add('content--open');
 		// console.log(this.contentItems[this.current]); // ContentItem {DOM: {…}}
 		this.contentItems[this.current].DOM.el.classList.add('content__item--current'); // 左下タイトル
 		this.DOM.stackItems[this.current].classList.add('stack__item--current');
 
-		// 左下タイトルのopacityの状態のみを対象に保持しておく
-		// → その後のアニメーションで使われ、スムーズなトランジション(位置や透明度などの変化)を実現するための基準となる
+		// this.DOM.stackItemsの状態をキャプチャしておく
+		// → DOM構造や位置の変化も含めた要素全体の状態を内部でキャプチャする
+		// Flip.from
+		// → 要素が親要素の移動や再配置などで変化した場合、元の位置(キャプチャ時の状態)と新しい位置の差異を自動的に補完(なめらかな遷移)
+		// { props: 'opacity' }
+		// → opacityの状態をしっかり保持しつつ補間する指示を出しているだけ
+		//	 Flip.fromはDOMの物理的な変化を検知して動きをなめらかに保管してくれるので、他のプロパティに関しても別に指定しなくても
+		//   アニメーションの範囲に含めることができる
 		const state = Flip.getState(this.DOM.stackItems, { props: 'opacity' });
 		this.DOM.slides.appendChild(this.DOM.el); // .slidesに.stackを格納
 
@@ -151,6 +162,8 @@ export class Slideshow {
 			duration: 1,
 			ease: 'expo',
 			onComplete: () => {
+				// console.log("complete!!");
+
 				this.isOpen = true;
 				this.isAnimating = false;
 			},
@@ -160,22 +173,23 @@ export class Slideshow {
 			// → 要素がアニメーション中に親要素から**絶対座標に基づいた位置（absolute positioning）**に切り替わります。
 			// 　これにより、要素がアニメーション中に DOM の影響を受けず、スムーズに目的の位置にアニメーションすることができます。
 		})
-		.to(this.DOM.mainTitleTexts, { // 右下のタイトル
+		.to(this.DOM.mainTitleTexts, { // 右下のタイトルをあげる
 			// ここからはFlip.fromの影響は受けない
 			duration: .9,
 			ease: 'expo',
 			yPercent: -101
 		}, 0) // タイムラインの先頭からの時間(秒)で開始。ここではFlip.fromの発火と同時に実行される
-		.to(this.contentItems[this.current].DOM.texts, { // 左下のタイトル
+		.to(this.contentItems[this.current].DOM.texts, { // 左下のタイトル .oh > .oh__inner
 			duration: 1,
 			ease: 'expo',
-			startAt: {yPercent: 101},
+			// yPercentが意図しない値に設定されている場合でも、確実にアニメーションの開始時点を明示的に0にリセットしておく
+			startAt: { yPercent: 101 }, // このブロックが発火してから下げて、y軸を0%にする。→ close()した時に-101の位置にある場合があるので
 			yPercent: 0
 		}, 0)
 		.to(this.DOM.backCtrl, { // backボタン
 			duration: 1,
 			ease: 'expo',
-			startAt: { opacity: 0 }, // opacityが意図しない値に設定されている場合でも、確実にアニメーションの開始時点を明示的に0にリセットしておく
+			startAt: { opacity: 0 }, 
 			opacity: 1
 		}, 0)
 		.to([this.DOM.navArrows.prev, this.DOM.navArrows.next], {
@@ -183,19 +197,20 @@ export class Slideshow {
 			ease: 'expo',
 			startAt: {
 				opacity: 0,
-				y: pos => pos ? -150 : 150
+				y: (idx) => {
+					// console.log(idx); // navArrowのインデックス
+					return idx ? -150 : 150 
+				},
 			},
 			y: 0,
-			opacity: pos => this.current === 0 && !pos || this.current === this.totalItems-1 && pos ? 0 : 1
+			// 最初の画像でidxが0の時 or 最後の画像でidexが1なら → opacityは0のまま
+			opacity: idx => this.current === 0 && !idx || this.current === this.totalItems-1 && idx ? 0 : 1
 		}, 0);
-
 	}
 	
+	// backボタンクリック(閉じる処理)
 	close() {
-
-		if ( this.isAnimating || !this.isOpen ) {
-			return;
-		}
+		if (this.isAnimating || !this.isOpen) return;
 		this.isAnimating = true;
 
 		this.scrollObserver.disable();
@@ -204,15 +219,14 @@ export class Slideshow {
 
 		$.body.classList.remove('oh');
 		
-		const state = Flip.getState(this.DOM.stackItems, {props: 'opacity'});
-		this.DOM.stackWrap.appendChild(this.DOM.el);
+		// 
+		const state = Flip.getState(this.DOM.stackItems, { props: 'opacity' });
+		this.DOM.stackWrap.appendChild(this.DOM.el); // this.DOM.el → .stack
 
-		gsap.set(this.DOM.el, {
-			y: 0
-		});
-
+		gsap.set(this.DOM.el, { y: 0 });
 		
 		Flip.from(state, {
+			// onStart: () => console.log("Flip"),
 			duration: 1,
 			ease: 'expo',
 			onComplete: () => {
@@ -224,41 +238,48 @@ export class Slideshow {
 				this.isAnimating = false;
 			},
 			absoluteOnLeave: true
-		})
-		.to(this.DOM.mainTitleTexts, {
+		}, 0)
+		.to(this.DOM.mainTitleTexts, { // 右下タイトル
+			// onStart: () => console.log("mainTitleTexts"),
 			duration: .9,
 			ease: 'expo',
-			startAt: {yPercent: 101},
+			startAt: { yPercent: 101 },
 			yPercent: 0
-		}, 0)
-		.to(this.contentItems[this.current].DOM.texts, {
+		}, 0) // タイムラインの先頭から
+		.to(this.contentItems[this.current].DOM.texts, { // 左下タイトル
+			// onStart: () => console.log("stcontentItemsart"),
 			duration: 1,
 			ease: 'expo',
 			yPercent: -101
 		}, 0)
-		.to(this.DOM.backCtrl, {
+		.to(this.DOM.backCtrl, { // backボタン
+			// onStart: () => console.log("backCtrl"),
 			duration: 1,
 			ease: 'expo',
 			opacity: 0
 		}, 0)
-		.to([this.DOM.navArrows.prev, this.DOM.navArrows.next], {
+		.to([this.DOM.navArrows.prev, this.DOM.navArrows.next], { // 上下の矢印
+			// onStart: () => console.log("navArrows"),
 			duration: 1,
 			ease: 'expo',
 			y: pos => pos ? 100 : -100,
 			opacity: 0
 		}, 0);
 	}
-	
-	navigate(direction) {
-		if ( this.isAnimating || (direction === 'next' && this.current === this.totalItems-1) || (direction === 'prev' && this.current === 0) ) return;
+
+	// 上下の矢印をクリック時
+	navigate(_direction) {
+		// アニメーション中は矢印をクリックしても処理を中断させる
+		// nextの時で、最後の画像をクリック or prevの時で元の画像をクリック
+		if ( this.isAnimating || (_direction === 'next' && this.current === this.totalItems-1) || (_direction === 'prev' && this.current === 0) ) return;
 		this.isAnimating = true;
 
 		const previousCurrent = this.current;
-		const currentItem = this.DOM.stackItems[previousCurrent];
-		this.current = direction === 'next' ? this.current+1 : this.current-1
+		const currentStackItem = this.DOM.stackItems[previousCurrent];
+		this.current = _direction === 'next' ? this.current+1 : this.current-1
 		const upcomingItem = this.DOM.stackItems[this.current];
 		
-		currentItem.classList.remove('stack__item--current');
+		currentStackItem.classList.remove('stack__item--current');
 		upcomingItem.classList.add('stack__item--current');
 
 		gsap.set(this.DOM.navArrows.prev, {opacity: this.current > 0 ? 1 : 0});
@@ -268,7 +289,7 @@ export class Slideshow {
 		.to(this.DOM.el, {
 			duration: 1,
 			ease: 'expo',
-			y: direction === 'next' ? `-=${windowsize.height/2 + windowsize.height*.02}` : `+=${windowsize.height/2 + windowsize.height*.02}`,
+			y: _direction === 'next' ? `-=${windowsize.height/2 + windowsize.height*.02}` : `+=${windowsize.height/2 + windowsize.height*.02}`,
 			onComplete: () => {
 				this.isAnimating = false;
 			}
@@ -276,13 +297,13 @@ export class Slideshow {
 		.to(this.contentItems[previousCurrent].DOM.texts, {
 			duration: .2,
 			ease: 'power1',
-			yPercent: direction === 'next' ? 101 : -101,
+			yPercent: _direction === 'next' ? 101 : -101,
 			onComplete: () => this.contentItems[previousCurrent].DOM.el.classList.remove('content__item--current')
 		}, 0)
 		.to(this.contentItems[this.current].DOM.texts, {
 			duration: .9,
 			ease: 'expo',
-			startAt: {yPercent: direction === 'next' ? -101 : 101},
+			startAt: {yPercent: _direction === 'next' ? -101 : 101},
 			onStart: () => this.contentItems[this.current].DOM.el.classList.add('content__item--current'),
 			yPercent: 0
 		}, .2)
