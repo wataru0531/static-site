@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website Project</title>
+    <meta name="description" content="Website Project" />
+
+    <!-- Google Fonts -->
+
+    <script type="module" defer src="./js/main.js"></script>
+  </head>
+  <body data-barba="wrapper">
+    <header class="nav-header">
+      <h1><a href="./index.html" class="" id="logo">days.</a></h1>
+      <div class="burger">
+        <div class="line1"></div>
+        <div class="line2"></div>
+      </div>
+    </header>
+
+    <!--
+      container
+      data-barba="container"が遷移時にbarbaによって更新される。
+      したがって、コンテナの外側にあるものはページを遷移しても更新されない。
+    -->
+    <!-- 
+      namespace
+      名前空間。
+      この属性の値で各ページに固有の名前を定義することが可能
+    -->
+    <main data-barba="container" data-barba-namespace="home">
+      <!-- mountain --> 
+      <section class="mountain slide">
+        <div class="hero-img">
+          <img src="./images/forest.webp" alt="mountain" />
+
+          <div class="reveal-img"></div>
+        </div>
+
+        <div class="hero-desc">
+          <div class="title">
+            <h2>
+              Freedom at your <span class="mountain-span">fingertips.</span>
+            </h2>
+            <div class="title-swipe t-swipe1"></div>
+          </div>
+
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            Dignissimos adipisci ea suscipit esse, ratione dolorum eaque sint
+            ipsum veritatis sit odit cum illum quas perferendis fuga eveniet
+            deleniti excepturi molestiae.
+          </p>
+
+          <a class="explore moutain-exp">Explore</a>
+
+          <div class="reveal-text"></div>
+        </div>
+      </section>
+
+      <!-- hike -->
+      <section class="hike slide">
+        <div class="hero-img">
+          <img src="./images/hike.webp" alt="hike" />
+          <div class="reveal-img"></div>
+        </div>
+
+        <div class="hero-desc">
+          <div class="title">
+            <h2>Freedom at your <span class="hike-span">fingertips.</span></h2>
+            <div class="title-swipe t-swipe2"></div>
+          </div>
+
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            Dignissimos adipisci ea suscipit esse, ratione dolorum eaque sint
+            ipsum veritatis sit odit cum illum quas perferendis fuga eveniet
+            deleniti excepturi molestiae.
+          </p>
+
+          <a class="explore hike-exp">Explore</a>
+
+          <div class="reveal-text"></div>
+        </div>
+      </section>
+
+      <!-- fashion -->
+      <section class="fashion slide">
+        <div class="hero-img">
+          <img src="./images/fashion.webp" alt="fashion image" />
+          <div class="reveal-img"></div>
+        </div>
+
+        <div class="hero-desc">
+          <div class="title">
+            <h2>
+              Freedom at your <span class="fashion-span">fingertips.</span>
+            </h2>
+            <div class="title-swipe t-swipe3"></div>
+          </div>
+
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            Dignissimos adipisci ea suscipit esse, ratione dolorum eaque sint
+            ipsum veritatis sit odit cum illum quas perferendis fuga eveniet
+            deleniti excepturi molestiae.
+          </p>
+
+          <a href="./fashion/" class="explore fashion-exp">Explore</a>
+
+          <div class="reveal-text"></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ドロワー -->
+    <div class="nav nav-bar">
+      <ul class="nav-links">
+        <h3>Twitter</h3>
+        <h3>YouTube</h3>
+        <h3>Instagram</h3>
+      </ul>
+      <div class="contact">
+        <h2>Stay in touch</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error
+          officia optio libero cupiditate, ex sint beatae harum vel?
+          Repellendus, architecto? Ratione fuga perspiciatis voluptas deleniti
+          cupiditate praesentium nisi, ipsa exercitationem.
+        </p>
+      </div>
+    </div>
+
+    <!-- カーソル -->
+    <div class="cursor">
+      <span class="cursor-text"></span>
+    </div>
+
+    <!-- ページトランジションのスワイプ -->
+    <div class="swipe swipe1"></div>
+    <div class="swipe swipe2"></div>
+    <div class="swipe swipe3"></div>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.min.js"></script> -->
+  </body>
+</html>

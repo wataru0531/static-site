@@ -1,0 +1,164 @@
+/**************************************************************
+
+Reset CSS
+
+***************************************************************/
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeSpeed;
+  -webkit-tap-highlight-color: transparent;
+  color: #333333;
+  font-family: "Josefin Sans", "游ゴシック体", YuGothic, "游ゴシック Medium",
+    "Yu Gothic Medium", "游ゴシック", "Yu Gothic", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  min-height: 100vh;
+  /* min-height: -webkit-fill-available; */
+  overflow-wrap: break-word;
+  position: relative;
+  z-index: -9999;
+}
+
+
+
+/**************************************************************
+
+Final Project Photon
+https://www.udemy.com/course/the-creative-javascript-course/learn/lecture/29046408?start=1#overview
+
+***************************************************************/
+
+.l-inner {
+	margin: 0 auto;
+	padding-right: 20px;
+	padding-left: 20px;
+	width: 100%;
+	/* max-width: 540px; 状況によって変える */
+	height: inherit;
+}
+
+@media screen and (min-width: 1150px){
+  .l-inner {
+    padding-right: 25px;
+    padding-left: 25px;
+    max-width: 1150px;
+  }
+  
+}
+
+
+.header {
+  width: 100%;
+  height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header h2 {
+  padding: 2rem;
+  font-size: 50px;
+}
+
+.logo {
+}
+
+.form-block{
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+}
+
+.search-form {
+  flex: 1;
+  margin-right: 50px;
+  /* width: 100%; */
+  /* max-width: 600px; */
+  /* padding: 2rem; */
+  display: flex;
+}
+
+.search-form input[type="text"] {
+  /* margin-right: 10px; */
+  border: 2px solid rgb(74, 68, 131);
+  /* border-radius: 5px; */
+}
+
+/* submitボタン */
+.submit-btn {
+  padding: 8px;
+  color: #ffffff;
+  background-color: rgb(74, 68, 131);
+}
+
+.clear-btn-wrapper{
+  width: 150px;
+}
+
+/* clearボタン */
+.clear-btn {
+  padding: 8px;
+  width: 100%;
+  max-width: 150px;
+  color: rgb(74, 68, 131);
+  background-color: #ffffff;
+  border: 1px solid rgb(74, 68, 131); 
+}
+
+
+.gallery {
+  margin: 0 auto;
+  padding: 2rem 0;
+  width: 90%;
+  display: grid;
+  /* grid https://ascii.jp/elem/000/001/659/1659899/ */
+  /* auto-fill 親要素にスペースが余る場合、空のグリッドが作られ埋められる(右に隙間が生じる) */
+  /* auto-fit  親要素にスペースが余る場合、グリッドアイテムが伸びて幅が埋められる(右に隙間は生じない) */
+  /* minmax(最小値, 最大値) */
+  /* grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  row-gap: 5rem;
+  column-gap: 1rem;
+}
+
+.gallery-info {
+  padding: 0.8rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* color: gray; */
+}
+
+.gallery-info a {
+  /* Download */
+  color: gray;
+}
+
+.gallery-img img {
+  /* 画像 */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nav-button {
+  margin-top: 150px;
+  margin-bottom: 300px;
+  text-align: center;
+}
+
+/* ボタン */
+.nav-button .more {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
+  max-width: 300px;
+  font-size: 18px;
+  color: #ffffff;
+  background-color: rgb(74, 68, 131);
+}

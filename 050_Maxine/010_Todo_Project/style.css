@@ -1,0 +1,173 @@
+/**************************************************************
+
+Reset CSS
+
+***************************************************************/
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeSpeed;
+  -webkit-tap-highlight-color: transparent;
+  color: #333333;
+  font-family: "Josefin Sans", "游ゴシック体", YuGothic, "游ゴシック Medium",
+    "Yu Gothic Medium", "游ゴシック", "Yu Gothic", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  min-height: 100vh;
+  /* min-height: -webkit-fill-available; */
+  overflow-wrap: break-word;
+  position: relative;
+  z-index: -9999;
+}
+
+/**************************************************************
+
+Todo Project
+https://www.udemy.com/course/the-creative-javascript-course/learn/lecture/29046408?start=1#overview
+
+***************************************************************/
+
+.global-container{
+  min-height: inherit;
+  background: linear-gradient(120deg, #e2c35d, #d88771);
+}
+
+.l-inner {
+	margin: 0 auto;
+	padding-right: 20px;
+	padding-left: 20px;
+	width: 100%;
+	/* max-width: rem(540); */
+	height: inherit;
+}
+
+@media screen and (min-width: 768px){
+
+  .l-inner{
+    padding-right: 25px;
+    padding-left: 25px;
+    max-width: 1150px;
+  }
+  
+}
+
+
+.todo{
+  /* background: linear-gradient(120deg, #e2c35d, #d88771); */
+  /* height: calc(100vh - 100px); */
+}
+
+.todo__form{
+  /* position: relative; */
+}
+
+.todo__form-input{
+  position: relative;
+}
+
+.todo__form-select{
+  margin-top: 10px;
+}
+
+.todo-container{
+  margin-top: 20px;
+}
+
+.todo-item{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background: white;
+
+  /* .completed、.fallの付与でのtransition */
+  /* transitionedはこのtransitionが実行されてから発火 */
+  transition: all .2s ease; 
+}
+
+.todo-item > li {
+  margin-bottom: 5px;
+}
+
+.todo-item:not(:first-child){
+  margin-top: 10px;
+}
+
+.todo__button{
+  width: 20px;
+  height: 20px;
+  background: #d88771;
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+/* 削除ボタン */
+.todo__deleteButton{
+  display: inline-block;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-right: 15px;
+  padding-left: 15px;
+  font-weight: bold;
+  color: white;
+  background: #ff6f47;
+  border-radius: 9999px;
+}
+
+/* 完了ボタン */
+.todo__completedButton{
+  display: inline-block;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-right: 15px;
+  padding-left: 15px;
+  font-weight: bold;
+  color: white;
+  background: #49cc49;
+  border-radius: 9999px;
+}
+
+/* 完了ボタンがクリックされて時 */
+.completed {
+  text-decoration: line-through;
+  opacity: .5; 
+}
+
+/* 削除ボタンがクリックされた時 */
+.fall {
+  transform: translateY(8px) rotateZ(20deg);
+  opacity: 0;
+}
+
+
+
+/* リセットボタン */
+.todo__reset{
+  margin-top: 20px;
+  text-align: left;
+}
+.todo__reset-button{
+  display: inline-block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 100%;
+  max-width: 200px;
+  font-weight: bold;
+  font-size: 18px;
+  color: white;
+  letter-spacing: .05em;
+  background: lightblue;
+  border-radius: 9999px;
+}

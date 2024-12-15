@@ -1,0 +1,357 @@
+@use "./global/" as *;
+@use "sass:math";
+
+// globalはその他のフォルダで読み込むだけなのでここで読み込む必要はない。
+@use "./foundation"; // index.scssは省略できるので、fundationフォルダでuseしたものをここで使うことができる。
+@use "./layout";
+@use "./component";
+@use "./project";
+@use "./utility";
+@use "./external";
+
+/**************************************************************
+Website Project
+***************************************************************/
+
+body {
+  background-color: #17181a;
+  // font-family: ;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body.overflow {
+  overflow: hidden;
+}
+
+main {
+  position: absolute;
+}
+
+#logo {
+  color: white;
+  // font-family: "Abril Fatface";
+}
+
+.nav-header {
+  // margin: auto;
+  padding: 2rem 2rem;
+  width: 100%;
+  min-height: 10vh;
+  font-size: 1rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+// ハンバーガー
+.line1,
+.line2 {
+  margin: 0.4rem;
+  width: 3rem;
+  height: 0.2rem;
+  background-color: white;
+  pointer-events: none;
+}
+
+.slide {
+  margin: 0 auto;
+  width: 80%;
+  min-height: 100vh;
+  color: white;
+  background-color: #17181a;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hero-desc {
+  padding-left: 5rem;
+  flex: 1;
+  flex-basis: 25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.hero-img {
+  flex: 1;
+  flex-basis: 25rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fashion-span {
+  color: rgb(255, 139, 93);
+}
+.mountain-span {
+  color: rgb(86, 124, 228);
+}
+.hike-span {
+  color: rgb(167, 110, 231);
+}
+
+.hero-desc {
+  // font-family: ;
+  font-size: 3rem;
+}
+
+.hero-desc p {
+  padding: 3rem 0rem;
+  font-size: 1.5rem;
+  color: rgb(223, 223, 223);
+}
+
+.explore {
+  padding: 1rem 2rem;
+  color: white;
+  // background-color: none;
+  font-size: 1rem;
+  border: 1px solid #ffffff;
+  text-decoration: none;
+  align-self: flex-start; // flexアイテムの配置を個別に指定するプロパティ
+  cursor: pointer;
+}
+
+// ドロワー
+.nav-bar {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  // opacity: 1;
+
+  // 参考 https://coliss.com/articles/build-websites/operation/css/how-to-use-css-clip-path.html
+  // circle(円の大きさ, x軸, y軸)
+  // デフォルトの位置は左上を基準に0の位置
+  clip-path: circle(50px at 100% 0);
+  -webkit-clip-path: circle(50px at 100% 0);
+}
+
+.burger {
+  cursor: pointer;
+}
+
+// sns
+.nav-links {
+  font-size: 4rem;
+  flex-basis: 30rem;
+}
+
+.nav-links h3 {
+  padding: 1rem 0rem;
+}
+
+.contact {
+  flex-basis: 30rem;
+}
+
+.contact h2 {
+  padding: 2rem 0rem;
+  font-size: 3rem;
+}
+
+.contact p {
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+
+// 画像、テキストの下の配置した空のdivタグ
+.reveal-img,
+.reveal-text {
+  width: 100%;
+  height: 150%;
+  background-color: #17181a;
+  position: absolute;
+  top: -15%;
+  left: 0;
+}
+
+// カーソル
+.cursor {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  position: absolute;
+  border: 1px solid white;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  // transition: all ease-in-out 0.1s;
+  transition: background-color ease-in-out 0.1s, transform ease-in-out 0.1s;
+  // transition-property: background-color, transform;
+  // transform-origin: 75% 75%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cursor.nav-active {
+  border: none;
+  background-color: rgba(86, 124, 228, 0.5);
+  transform: translate(-50%, -50%) scale(3);
+}
+
+.cursor.explore-active {
+  border: none;
+  background-color: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%) scale(3);
+}
+
+.cursor-text {
+  font-size: 0.5rem;
+  // display: inline-block;
+  // position: absolute;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
+}
+
+.active {
+  color: blue;
+}
+
+.scrollmagic-pin-spacer {
+  position: static !important;
+}
+
+.title {
+  position: relative;
+  overflow: hidden;
+}
+
+// タイトル部分のスワイプ
+.title-swipe {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(100%);
+  // mix-blend-mode: difference;
+  mix-blend-mode: darken;
+}
+
+.t-swipe1 {
+  background-color: rgba(86, 124, 228);
+}
+
+.t-swipe2 {
+  background-color: rgb(167, 110, 231);
+}
+
+.t-swipe3 {
+  background-color: rgb(255, 139, 93);
+}
+
+// スワイプ page-transition時
+.swipe {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+}
+
+.swipe1{
+  background-color: rgb(167, 110, 231);
+  z-index: 5;
+}
+
+.swipe2{
+  background-color: rgba(86, 124, 228);
+  z-index: 4;
+}
+
+.swipe3{
+  background-color: rgb(255, 139, 93);
+  z-index: 3;
+}
+
+
+/**************************************************************
+fashion ページ
+***************************************************************/
+
+.fashion1,
+.fashion2,
+.fashion3 {
+  margin: 5rem auto 0;
+  width: 70%;
+  min-height: 90vh;
+  color: white;
+  display: flex;
+  // flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.fashion-img {
+  height: 80vh;
+  flex-basis: 30rem;
+}
+
+.fashion-text {
+  flex: 1;
+  position: relative;
+  flex-basis: 25rem;
+}
+
+.fashion-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fashion-text h1 {
+  padding: 5rem 0rem;
+  font-size: 4rem;
+}
+
+.fashion1 h1 {
+  color: rgba(255, 139, 93);
+}
+.fashion2 h1 {
+  color: rgba(167, 110, 231);
+}
+.fashion3 h1 {
+  color: rgba(86, 124, 228);
+}
+
+.fashion-text p {
+  font-size: 1.5rem;
+  padding: 2rem 2rem 0 0;
+  margin-bottom: 10rem;
+}
+
+.fashion-nr {
+  font-size: 15rem;
+  color: #ffffff;
+  opacity: .2;
+  position: absolute;
+  left: 30%;
+  bottom: 5%;
+}

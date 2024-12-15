@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo Project</title>
+    <meta
+      name="description"
+      content="
+        Todo Project
+        https://www.udemy.com/course/the-creative-javascript-course/learn/lecture/29046408?start=1#overview
+      "
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital@0;1&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/reset.css">
+    <link rel="stylesheet" href="./style.css" />
+
+    <script type="module" defer src="./js/app.js"></script>
+  </head>
+  <body>
+
+    <div class="global-container">
+      <section class="todo">
+        <div class="l-inner">
+          <h2>To Do Project</h2>
+
+          <form class="todo__form">
+            <div class="todo__form-input">
+              <input 
+                type="text" 
+                class="todo__input" 
+                id="js-todoInput"
+              >
+              <button 
+                class="todo__button" 
+                type="submit" 
+                class="todo-button" 
+                id="js-todoButton"
+              >+</button>
+            </div>
+            
+            <div class="todo__form-select">
+              <div class="select">
+                <!-- selectタグ 使い方 -->
+                <!-- https://html-coding.co.jp/annex/dictionary/html/select/ -->
+                <select 
+                  name="todos" 
+                  class="filter-todo" 
+                  id="js-filterTodo" 
+                  size="1"
+                  
+                >
+                  <option value="" >--Please choose an option--</option>
+                  <option value="all">all</option>
+                  <option value="completed">completed</option>
+                  <option value="uncompleted">uncompleted</option>
+                </select>
+              </div>
+            </div>
+          </form>
+
+          <div class="todo-container">
+
+            <!-- JavaScriptで生成・追加 -->
+            <!-- <div class="todo-item">
+              <li class="todo-text">
+                インプットテキスト
+              </li>
+              <button class="todo__deleteButton">delete</button>
+              <button class="todo__completedButton">completed</button>
+            </div> -->
+            <ul class="todo__list" id="js-todoList"></ul>
+          </div>
+
+          <div class="todo__reset">
+            <button 
+              class="todo__reset-button"
+              id="js-resetBtn"
+            >Reset</button>
+          </div>
+
+        </div>
+      </section>
+        
+
+      </div>
+
+  </body>
+</html>

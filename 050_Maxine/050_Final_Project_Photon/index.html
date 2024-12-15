@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Final Project Photon</title>
+    <meta
+      name="description"
+      content="
+        Final Project Photon
+        https://www.udemy.com/course/the-creative-javascript-course/learn/lecture/29046408?start=1#overview
+      "
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital@0;1&display=swap" rel="stylesheet">
+
+    <!-- Google アイコン -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <link rel="stylesheet" href="/reset.css">
+    <link rel="stylesheet" href="./style.css" />
+
+    <script type="module" defer src="./js/app.js"></script>
+  </head>
+  <body>
+    
+    <header class="header">
+      <h2>
+        <a class="logo" id="logo" href="./index.html">Photon</a>
+      </h2>
+
+      <div class="form-block">
+        <form class="search-form" id="js-form" action="">
+          <input
+            class="search-input"
+            id="js-searchInput"
+            type="text"
+            name="search"
+          />
+          <!-- formにonsubmitの処理があれば、buttonにtype="submit"の機能を付与しなくてもいい -->
+          <!-- ボタンクリック → バブリングにより子要素から親要素にクリックが伝播してformが動作する -->
+          <!-- 
+            ・エンターキーによるフォームの送信は、ブラウザのデフォルトの動作による仕様。
+            ・ボタンクリックによるフォームの送信は、そのクリックイベントはボタン要素から始まり、
+              その後親要素にイベントが伝播するというメカニズムは、イベントバブリングによるもの。
+          -->
+          <button class="submit-btn" id="js-submitBtn">Search</button>
+        </form>
+        <div class="clear-btn-wrapper">
+          <button class="clear-btn" id="js-clearBtn">Clear</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="gallery" id="js-gallery">
+        <!-- APIで取得した画像を埋め込んでいく -->
+      </div>
+    </main>
+
+    <div class="nav-button">
+      <button class="more" id="js-moreBtn">More</button>
+    </div>
+
+
+
+
+  </body>
+</html>

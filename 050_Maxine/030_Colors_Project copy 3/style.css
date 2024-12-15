@@ -1,0 +1,315 @@
+/**************************************************************
+
+Reset CSS
+
+***************************************************************/
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeSpeed;
+  -webkit-tap-highlight-color: transparent;
+  color: #333333;
+  font-family: "Josefin Sans", "游ゴシック体", YuGothic, "游ゴシック Medium",
+    "Yu Gothic Medium", "游ゴシック", "Yu Gothic", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  min-height: 100vh;
+  /* min-height: -webkit-fill-available; */
+  overflow-wrap: break-word;
+  position: relative;
+  z-index: -9999;
+}
+
+
+/**************************************************************
+
+Colors Project
+https://www.udemy.com/course/the-creative-javascript-course/learn/lecture/29046408?start=1#overview
+
+***************************************************************/
+
+.l-inner {
+	margin: 0 auto;
+	padding-right: 20px;
+	padding-left: 20px;
+	width: 100%;
+	/* max-width: 540px; 状況によって変える */
+	height: inherit;
+}
+
+@media screen and (min-width: 1150px){
+  .l-inner {
+    padding-right: 25px;
+    padding-left: 25px;
+    max-width: 1150px;
+  }
+  
+}
+
+/* 注意 ... ところどころの要素のpointer-eventsをnoneにしている */
+/* svg{
+  pointer-events: none;
+} */
+
+.colors{
+  min-height: 80vh;
+  display: flex;
+  color: rgb(212, 212, 212);
+
+  background: rgba(0, 0, 0, .5);
+}
+
+.color{
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+
+  border: 1px solid #ffffff;
+}
+
+.color > h2{
+  font-size: 32px;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* スライダー　... Hue、Brightness、Saturationなど */
+.sliders {
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgb(110, 87, 87);
+  position: absolute;
+  bottom: 0;
+  border-top-right-radius: 16px;
+  border-top-left-radius: 16px;
+
+  /* we are adjustment class */
+  transition: all .5s ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(100px);
+}
+.sliders.active{
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.sliders > button{
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-weight: bold;
+  background: rgb(73, 73, 73);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.controls{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.controls > .lock{
+  margin-top: 20px;
+}
+
+.controls > button {
+  width: 35px;
+}
+
+/* パネル */
+.panel{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 20vh;
+}
+
+.panel button{
+  /* font-size: 20px; */
+  display: inline-block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+  background: rgb(113, 116, 149);
+  border-radius: 5px;
+}
+
+.library-panel, .generate-panel, .save-panel{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.library-panel > p,
+.generate-panel > p, 
+.save-panel > p{
+  margin-top: 15px;
+}
+
+/* アイコン */
+.library-panel .material-symbols-outlined,
+.generate-panel .material-symbols-outlined,
+.save-panel .material-symbols-outlined {
+  color: white;
+}
+
+.panel p{
+  font-size: 20px;
+}
+
+
+/* input[type="range"] */
+input[type="range"]{
+  appearance: none;
+  margin: 16px 0;
+  width: 100%;
+  position: relative;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+/* コピーコンテナー */
+.copy-container,
+.save-container,
+.library-container
+{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  
+  transition: opacity .3s ease, pointer-events .3s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+.copy-container.active,
+.save-container.active,
+.library-container.active{
+  opacity: 1;
+  pointer-events: auto; /*初期値 auto*/
+}
+
+.copy-popup,
+.save-popup,
+.library-popup{
+  /* width: 100%; */
+  min-width: 30%;
+  /* height: 100%; */
+  min-height: 30vh;
+  background: #ffffff;
+  display: flex;
+  justify-content: space-evenly; /* スペースを均等に */
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+
+  transition: transform .5s ease;
+  transform: translateY(-2rem);
+}
+
+.copy-popup.active,
+.save-popup,
+.library-popup{
+  transform: translateY(0);
+}
+
+.copy-popup h4,
+.save-popup h4,
+.library-popup h4{
+
+
+}
+
+/* save-container関連 */
+input[type=text].save-name{ /*細度を高める*/
+  width: 100%;
+  max-width: 300px;
+}
+
+.submit-save{
+  padding: 5px 20px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #ffffff;
+  background: rgb(60, 60, 92);
+  border-radius: 5px;
+}
+
+/* ライブラリのポップアップ表示 */
+.library-popup{
+  min-width: 40%;
+  padding: 10px;
+  justify-content: flex-start;
+  overflow-y: scroll;
+  max-height: 50vh;
+}
+
+/* JS側で生成 */
+.custom-palette{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  padding: 10px;
+}
+
+.small-preview{
+  flex: 1;
+  display: flex;
+}
+
+.custom-palette h4{
+  flex: 1;
+}
+
+.small-preview div{
+  flex: 1;
+  height: 5rem;
+}
+
+.pick-palette-btn{
+  display: inline-block;
+  padding: 10px;
+  background: rgb(41, 41, 41);
+  color: white;
+  height: 5rem;
+  font-weight: bold;
+}
+
+
+/* localStorageをクリア */
+.clearLocalStorage{
+  margin-top: 10px;
+  margin-bottom: 100px;
+  text-align: center;
+}
+
+.clearLocalBtn{
+  padding: 15px;
+  width: 100%;
+  max-width: 300px;
+  font-weight: bold;
+  font-size: 18px;
+  color: white;
+  background: rgb(86, 153, 133);
+  border-radius: 5px;
+}

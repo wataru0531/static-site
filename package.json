@@ -2,13 +2,17 @@
   "name": "static-site",
   "type": "module",
   "dependencies": {
-    "@barba/core": "^2.9.7",
+    "@barba/core": "^2.10.3",
     "@parcel/core": "^2.6.2",
     "gsap": "^3.10.4",
     "lenis": "^1.1.16",
     "lodash": "^4.17.21",
     "normalize.css": "^8.0.1",
-    "regenerator-runtime": "^0.13.9"
+    "regenerator-runtime": "^0.13.9",
+    "sass": "^1.83.0",
+    "scrollmagic": "^2.0.8",
+    "scrollmagic-plugin-gsap": "^1.0.4",
+    "scrollmagic-plugins": "^1.0.8"
   },
   "devDependencies": {
     "@parcel/optimizer-htmlnano": "^2.8.3",
@@ -24,7 +28,8 @@
     "sec2": "npm run clean && parcel watch ./020_scrolls/**/index.html --dist-dir ./dist",
     "sec3": "npm run clean && parcel watch ./030_Layout_Transitions/**/index.html --dist-dir ./dist",
     "sec4": "npm run clean && parcel watch ./040_Grid/**/index.html --dist-dir ./dist",
-    "sec5": "npm run clean && parcel watch ./030_Layout_Transitions/**/index.html --dist-dir ./dist"
+    "sec5": "npm run clean && parcel watch ./050_Maxine/**/index.html --dist-dir ./dist",
+    "sec6": "npm run clean && parcel watch ./060_Layout_Transitions/**/index.html --dist-dir ./dist"
   },
   "staticFiles": {
     "staticPath": "images",
