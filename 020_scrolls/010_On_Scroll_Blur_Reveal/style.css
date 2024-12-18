@@ -154,7 +154,7 @@ a:focus-visible {
 }
 
 .frame {
-	padding: var(age-padding);
+	padding: var(--page-padding);
 	position: relative;
 	display: grid;
 	z-index: 800;

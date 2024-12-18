@@ -26,7 +26,74 @@ export const utils = {
   getMousePos,
   getClipPos,
   getMapPos,
+  calculateInitialTransform,
 }
+
+
+// 各画像をx, y, z軸方向に動かす値、回転する角度を返す処理
+// →　ランダムではなく、一定の基準に基づいて均等に動かす
+//    例: ビューポート中央から遠い画像ほど、移動距離や回転する値が大きくなる
+function calculateInitialTransform(element, offsetDistance = 250, maxRotation = 300, maxZTranslation = 2000) {
+  const viewportCenter = { // ビューポートの中央
+    width: window.innerWidth / 2, 
+    height: window.innerHeight / 2 
+  };
+
+  const elementCenter = { // 格納その中央の座表
+    // offsetLeft → ビューポートの左側からの距離
+    x: element.offsetLeft + element.offsetWidth / 2, 
+    y: element.offsetTop + element.offsetHeight / 2 
+  };
+  // console.log(element.offsetLeft); 
+  // console.log(element.offsetTop); // 親要素(.grid_img)の上端からの距離
+
+  // 中央(0, 0)から各画像までの角度を算出
+  // atan → 長さの比から角度を算出。tanは角度から比を算出する
+  //        計算される角度は -π から π の範囲で、-180° から 180° まで
+  const angle = Math.atan2(
+    Math.abs(viewportCenter.height - elementCenter.y), 
+    Math.abs(viewportCenter.width - elementCenter.x),
+    // viewportCenter.height - elementCenter.y, 
+    // viewportCenter.width - elementCenter.x
+  );
+  // console.log(angle); 
+
+  // 画像の角度に合わせて、x軸、y軸の位置を設定し、250をかけて移動距離を決定
+  const translateX = Math.abs(Math.cos(angle) * offsetDistance);
+  const translateY = Math.abs(Math.sin(angle) * offsetDistance);
+
+  // ビューポートの中央から角四方までの距離
+  // Math.pow(2, 3) → べき乗。2*2*2 のこと
+  // console.log(Math.pow(viewportCenter.width, 2)); // 250000
+  const maxDistance = Math.sqrt(Math.pow(viewportCenter.width, 2) + Math.pow(viewportCenter.height, 2));
+
+  // 中央から各画像までの距離
+  const currentDistance = Math.sqrt(Math.pow(viewportCenter.width - elementCenter.x, 2) + Math.pow(viewportCenter.height - elementCenter.y, 2));
+
+  // ビューポート中央から各画像の中央までの距離に対する、最大距離の比率。0 〜 1
+  const distanceFactor = currentDistance / maxDistance;
+
+  // 回転角度を決定
+  // 中央から離れている要素ほど大きく回転する
+  // x軸に対する回転 → 要素のy軸を
+  // rotationX: マイナスなら手前側に回る
+  // rotationY: マイナスなら、左に回る
+  const rotationX = ((elementCenter.y < viewportCenter.height ? -1 : 1) * (translateY / offsetDistance) * maxRotation * distanceFactor);
+  const rotationY = ((elementCenter.x < viewportCenter.width ? 1 : -1) * (translateX / offsetDistance) * maxRotation * distanceFactor);
+
+  // z軸方向への値。2000をかけているだけ
+  const translateZ = maxZTranslation * distanceFactor;
+
+  // 各画像をx, y, z軸方向に動かす値、回転する角度を返す
+  return {
+    // 中央より右側の画像はプラス、左側の画像はマイナスに
+    x: elementCenter.x < viewportCenter.width ? -translateX : translateX,
+    y: elementCenter.y < viewportCenter.height ? -translateY : translateY,
+    z: translateZ,
+    rotateX: rotationX,
+    rotateY: rotationY
+  };
+};
 
 
 // そのCSSに設定されているcssの値を取得
