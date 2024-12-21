@@ -1,0 +1,523 @@
+
+
+:root {
+	font-size: 14px;
+	--color-text: #8572b2;
+	--color-bg: #0f0026;
+	--color-link: #abcb1a;
+	--color-link-hover: #fff;
+	--color-trigger: #d2d2d2;
+	--color-ui-bg: rgba(153, 71, 235, 0);
+	--color-ui-border: #4d25b0;
+	--color-ui-border-deco: #abcb1a;
+	--color-ui-meta: #58487e;
+	--color-ring: #abcb1a;
+}
+
+html,
+body,
+main {
+	height: 100%;
+}
+
+/* スクロールバー */
+::-webkit-scrollbar{
+  display: block;
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 1px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #aacb1964;
+}
+
+/* Handle → 動く部分 */
+::-webkit-scrollbar-thumb {
+	background: #abcb19;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	/* background: #abcb19; */
+	background: rgb(138, 218, 112);
+}
+
+
+body {
+	margin: 0;
+	color: var(--color-text);
+	background-color: var(--color-bg);
+	font-family: "lores-12", sans-serif;
+	text-transform: uppercase;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	width: 100%;
+	min-height: 100vh;
+	min-height: -webkit-fill-available;
+	overflow: hidden;
+}
+
+p {
+	margin: 0 0 0.5rem;
+}
+
+/* Page Loader */
+.js .loading::before,
+.js .loading::after {
+	content: '';
+	position: fixed;
+	z-index: 1000;
+}
+
+.js .loading::before {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--color-bg);
+}
+
+.js .loading::after {
+	top: 50%;
+	left: 50%;
+	width: 60px;
+	height: 60px;
+	margin: -30px 0 0 -30px;
+	border-radius: 50%;
+	opacity: 0.4;
+	background: var(--color-link);
+	animation: loaderAnim 0.7s linear infinite alternate forwards;
+
+}
+
+@keyframes loaderAnim {
+	to {
+		opacity: 1;
+		transform: scale3d(0.5, 0.5, 1);
+	}
+}
+
+a {
+	text-decoration: none;
+	color: var(--color-link);
+	outline: none;
+	cursor: pointer;
+}
+
+a::before {
+	content: "[";
+}
+
+a::after {
+	content: "]";
+}
+
+a:hover {
+	color: var(--color-link-hover);
+	outline: none;
+}
+
+/* Better focus styles from https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible */
+a:focus {
+	/* Provide a fallback style for browsers
+	 that don't support :focus-visible */
+	outline: none;
+	background: lightgrey;
+}
+
+a:focus:not(:focus-visible) {
+	/* Remove the focus indicator on mouse-focus for browsers
+	 that do support :focus-visible */
+	background: transparent;
+}
+
+a:focus-visible {
+	/* Draw a very noticeable focus style for
+		keyboard-focus on browsers that do support
+	 :focus-visible */
+	outline: 2px solid red;
+	background: transparent;
+}
+
+.unbutton {
+	background: none;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	font: inherit;
+	cursor: pointer;
+}
+
+.unbutton:focus {
+	outline: none;
+}
+
+main {
+	padding: 1rem;
+	gap: 1rem;
+	display: grid;
+	height: 100vh;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto 1fr;
+	grid-template-areas: 'header' 'content';
+
+	/* 
+		１つ目のグラデーション 縦方向に、50%までがrgb(75 55 231 / 10%)で残りがrgb(34 36 69)の色
+			→ くっきり変わる。
+
+		2つ目のグラデーション 左から右に指定。0%、50%、100%地点にと均等に色を配色している
+      → rgb(64 55 55 / 9%) の9%は透明度のこと。ハイフンかカンマで区切る
+
+		1つめのグラデーションに2つ目の透明なグラデーションが乗っている形
+
+	*/
+	background: linear-gradient(rgb(75 55 231 / 10%) 50%, rgb(34 36 69) 50%), 
+							linear-gradient(90deg, rgb(64 55 55 / 9%), rgb(64 181 64 / 3%), rgba(0, 0, 255, 0.06))
+	;
+	/* background: linear-gradient(rgb(75 55 231 / 10%) 50%, rgb(34 36 69) 50%); */
+	/* background: linear-gradient(90deg, red, green, white); */
+
+	background-size: 100% 2px, 3px 100%;
+	background-repeat: no-repeat;
+	/* 
+		100% 2px ... 初めのlinear-gradientに適用。幅が100%で高さが2px
+		3px 100% ... 2つ目のlinear-gradientに適用。幅は3pxだが高さは100%で画面いっぱいの高さ
+		⭐️background-repeatでリピートしている状態
+	*/
+}
+
+.ui {
+	position: relative;
+	border: 1px solid var(--color-ui-border);
+	background: var(--color-ui-bg);
+	padding: 2rem;
+	overflow: hidden;
+}
+
+.ui::before,
+.ui::after {
+	width: 10px;
+	height: 10px;
+	content: '';
+	border: 1px solid var(--color-ui-border-deco);
+	position: absolute;
+}
+
+.ui::before {
+	top: -5px;
+	left: -5px;
+	border-right: 0;
+	border-bottom: 0;
+}
+
+.ui::after {
+	bottom: -5px;
+	right: -5px;
+	border-top: 0;
+	border-left: 0;
+}
+
+.ui--small {
+	font-size: 0.75rem;
+}
+
+.meta {
+	display: none;
+}
+
+.meta--1 {
+	grid-area: meta-1;
+}
+
+.meta--2 {
+	grid-area: meta-2;
+}
+
+.meta--3 {
+	grid-area: meta-3;
+}
+
+.meta--4 {
+	grid-area: meta-4;
+}
+
+.meta h2 {
+	margin: 0;
+}
+
+strong::before {
+	content: './_';
+}
+
+.header {
+	grid-area: header;
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-areas: 'title' 'prev' 'back' 'sponsor' 'demos';
+	grid-gap: 0.5rem;
+	align-content: start;
+}
+
+body #cdawrap {
+	justify-self: start;
+}
+
+.header__title {
+	grid-area: title;
+	font-size: inherit;
+	margin: 0;
+	font-weight: inherit;
+}
+
+.header__back {
+	grid-area: back;
+}
+
+.header__prev {
+	grid-area: prev;
+}
+
+.content {
+	grid-area: content;
+	position: relative;
+	height: 100%;
+}
+
+.content__inner {
+	height: 100%;
+	position: relative;
+	padding-right: 2rem;
+	overflow-y: scroll;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.content p {
+	font-size: 1.25rem;
+	margin: 0;
+}
+
+.trigger {
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+	cursor: pointer;
+	color: var(--color-trigger);
+}
+
+
+@keyframes spin {
+	to {
+		transform: rotateY(-360deg);
+	}
+}
+
+@keyframes opacity {
+	to {
+		opacity: 1;
+	}
+}
+
+/* tooltip */
+
+.tooltip {
+	--tt-width: 200px;
+--tt-height: 250px;
+--tt-columns: 3;
+--tt-rows: 4;
+--tt-bg-color: #4d25b0;
+--tt-text-color: #abcb19;
+position: absolute;
+pointer-events: none;
+opacity: 0;
+top: 50%;
+left: 50%;
+width: var(--tt-width);
+height: var(--tt-height);
+display: grid;
+grid-template-areas: 'tooltip';
+}
+
+.tooltip--style-alt {
+--tt-bg-color: #94ad24;
+	--tt-text-color: #2e3023;
+}
+
+.tooltip--show {
+opacity: 1;
+}
+
+.tooltip__bg {
+grid-area: tooltip;
+width: 100%;
+height: 100%;
+display: grid;
+grid-template-columns: repeat(var(--tt-columns), 1fr);
+grid-template-rows: repeat(var(--tt-rows), 1fr);
+background: var(--tt-bg-color);
+}
+
+.js .tooltip__bg {
+background: transparent;
+}
+
+.tooltip__bg div {
+background: var(--tt-bg-color);
+	outline: 1px solid var(--tt-bg-color); /* Fixes the gap in FF */
+}
+
+.tooltip__content {
+grid-area: tooltip;
+color: var(--tt-text-color);
+position: relative;
+padding: 1rem;
+display: flex;
+flex-direction: column;
+gap: 0.5rem;
+}
+
+.tooltip__content-title {
+font-weight: normal;
+margin: 0;
+font-size: 1.5rem;
+}
+
+.tooltip__content-meta {
+margin: 0;
+}
+
+.tooltip__content-desc {
+margin: auto 0 0 0;
+}
+
+@media screen and (min-width: 53em) {
+	.tooltip {
+			--tt-width: 290px;
+			--tt-height: 330px;
+	}
+
+	.tooltip__content {
+			padding: 2rem;
+	}
+	
+	.tooltip__content-title {
+			font-size: 2rem;
+	}
+	
+}
+
+/* 
+	perspective
+	→　カメラ、視点で、物体からの相対的に距離で、値が小さければ物体に近く拡大して見える
+
+	preserve-3d
+	→ 3D変換を親要素だけでなく、子要素にも適用させるためのプロパティ
+		preserve-3d は親要素が持つ 3D の変換（例えば回転や移動）を子要素にも伝えるもの
+    通常、親要素に perspective や rotate3d などの 3D 変換を適用すると、親要素だけが影響を受け、
+		子要素はそのまま平面（2D）として描画される。
+		しかし、preserve-3d を使うことで、子要素も親要素の 3D 変換の影響を受けます。
+
+	⭐️注意 perspectiveを付与した親要素の直下の子要素に preserve-3d を適用する必要がある
+				孫要素も3d化したいなら、preserve-3Dを連続で下の要素にまで適用して伝播させていけばいい
+    
+*/
+.scene {
+	width: 80%;
+	height: auto;
+	aspect-ratio: 1;
+	margin: 20% auto 0;
+	perspective: 1000px;
+}
+
+.scene__inner {
+	width: 100%;
+	height: 100%;
+	/* 
+		rotateX x軸を軸に奥に回転
+	*/
+	transform: rotateX(24deg) rotateY(0deg);
+	transform-style: preserve-3d;
+}
+
+.globe {
+	position: relative;
+	width: 70%;
+	height: 70%;
+	margin: 0 auto;
+	transform-style: preserve-3d;
+	animation: spin 25s 0ms infinite linear;
+}
+
+.ring {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: 1px;
+	border-style: dotted;
+	border-radius: 50%;
+	color: var(--color-ring);
+	animation: opacity 0.75s forwards ease-in-out;
+	opacity: 0;
+}
+
+.ring:nth-child(1) {
+	transform: rotateY(4deg);
+}
+
+.ring:nth-child(2) {
+	transform: rotateY(30deg);
+}
+
+.ring:nth-child(3) {
+	transform: rotateY(56deg);
+}
+
+.ring:nth-child(4) {
+	transform: rotateY(82deg);
+}
+
+.ring:nth-child(5) {
+	transform: rotateY(108deg);
+}
+
+.ring:nth-child(6) {
+	transform: rotateY(134deg);
+}
+
+.ring:nth-child(7) {
+	transform: rotateY(160deg);
+}
+
+/* glitch */
+.glitch--1 {
+	animation-delay: 16s;
+}
+
+.glitch--2 {
+	animation-delay: 12s;
+}
+
+
+
+@media screen and (min-width: 53em) {
+	main {
+		grid-template-columns: 1fr 50vw 1fr;
+		grid-template-rows: auto auto 1fr;
+		grid-template-areas: 'header content meta-4'
+							'meta-2 content meta-3'
+							'meta-2 content meta-1';
+	}
+	.meta {
+		display: block;
+	}
+}

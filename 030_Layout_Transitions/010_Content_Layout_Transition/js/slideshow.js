@@ -1,10 +1,8 @@
 
 
-import { ContentItem } from './contentItem';
-import { gsap } from 'gsap';
-import { Flip } from 'gsap/Flip';
+import { ContentItem } from './contentItem.js';
+
 gsap.registerPlugin(Flip);
-import { Observer } from 'gsap/Observer';
 gsap.registerPlugin(Observer);
 
 let timerId = null;

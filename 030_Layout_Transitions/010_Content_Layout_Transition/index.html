@@ -5,17 +5,23 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Stack to Content Layout Transition | Codrops</title>
 		
-		<meta name="description" content="An experimental layout transition where a stack of images animates to a gallery view, showing some more content." />
-		<meta name="keywords" content="stack, layout transition, menu, gallery, gsap, javascript" />
-		<meta name="author" content="Codrops" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
 
 		<link rel="stylesheet" href="https://use.typekit.net/mai4fgw.css">
-		<link rel="stylesheet" href="/reset.css">
+		<link rel="stylesheet" href="/styles/reset.css">
 		<link rel="stylesheet" type="text/css" href="./css/base.css" />
 
 		<script>document.documentElement.className="js";</script>
 
-		<script defer type="module" src="js/index.js"></script>
+		<!-- GSAP -->
+		<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+		<!-- GSAP Flip plugin -->
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Flip.min.js"></script>
+		<!-- GSAP Observer -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Observer.min.js" integrity="sha512-pLJlXRr/H5t+k+Tjc+Qe0Z6u6psPak7rvYBdsZ0Z+kG84jn/zifMNTQBZKZlwZC1z23bifGoQWzGnI0eWBJKPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		
+		<script defer type="module" src="./js/index.js"></script>
 	</head>
 	<body class="demo-1 loading">
 		<main>
@@ -23,12 +29,12 @@
 			<header class="header">
 				<div class="header__title">
 					<h1 class="header__title-main">Stack to Content Layout Transition</h1>
-					<a aria-label="Back to the article" class="header__title-back" href="https://tympanus.net/codrops/?p=63558">
+					<a aria-label="Back to the article" class="header__title-back" href="">
 						<span class="oh__inner">Back to the article</span>
 						<svg width="18px" height="18px" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M18.25 15.5a.75.75 0 00.75-.75v-9a.75.75 0 00-.75-.75h-9a.75.75 0 000 1.5h7.19L6.22 16.72a.75.75 0 101.06 1.06L17.5 7.56v7.19c0 .414.336.75.75.75z"/></svg>
 					</a>
 					<br/>
-					<a class="header__title-prev" href="https://tympanus.net/Development/IntroTrailEffect/">Previous demo</a>
+					<a class="header__title-prev" href="">Previous demo</a>
 				</div>
 				<div class="header__logo">
 					<h2 class="header__logo-title">Jonas Tanaka</h2>

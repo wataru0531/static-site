@@ -29,7 +29,8 @@
     "sec3": "npm run clean && parcel watch ./030_Layout_Transitions/**/index.html --dist-dir ./dist",
     "sec4": "npm run clean && parcel watch ./040_Grid/**/index.html --dist-dir ./dist",
     "sec5": "npm run clean && parcel watch ./050_Maxine/**/index.html --dist-dir ./dist",
-    "sec6": "npm run clean && parcel watch ./060_Layout_Transitions/**/index.html --dist-dir ./dist"
+    "sec6": "npm run clean && parcel watch ./060_Hovers/**/index.html --dist-dir ./dist",
+    "sec7": "npm run clean && parcel watch ./070_/**/index.html --dist-dir ./dist"
   },
   "staticFiles": {
     "staticPath": "images",

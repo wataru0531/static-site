@@ -1,7 +1,7 @@
 
 
-import { utils } from '/utils';
-import { Slideshow } from './slideshow';
+import { utils } from '/utils.js';
+import { Slideshow } from './slideshow.js';
 
 const $ = {};
 $.stack = document.querySelector(".stack");
